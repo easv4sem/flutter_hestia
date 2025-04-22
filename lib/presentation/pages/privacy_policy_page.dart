@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:hestia/widgets/main_layout_widget.dart';
+import 'package:hestia/presentation/widgets/main_layout_widget.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
   const PrivacyPolicyPage({super.key});
@@ -25,13 +25,13 @@ class PrivacyPolicyPage extends StatelessWidget {
           children: [
             // Fixed left-side content
             SizedBox(
-              width: 200, // Fixed width for the left section
+              width: 300, // Fixed width for the left section
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   Text(
                     'Frequently Asked Questions',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),

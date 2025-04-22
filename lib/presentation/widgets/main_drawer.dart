@@ -2,19 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hestia/core/routes.dart';
 
-class MainLayoutWidget extends StatelessWidget {
-  final Widget body;
-  final String title;
-
-  const MainLayoutWidget({super.key, required this.body, required this.title});
+class MainDrawer extends StatelessWidget {
+  const MainDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      drawer: Drawer(
+    return Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -54,9 +47,8 @@ class MainLayoutWidget extends StatelessWidget {
               },
             ),
           ],
-        ),
-      ),
-      body: body,
+        ),      
     );
   }
+
 }

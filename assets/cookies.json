@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Session Cookie",
+    "description": "Used to maintain user sessions.",
+    "lifetime": "Until browser is closed"
+  },
+  {
+    "name": "Authentication Cookie",
+    "description": "Stores user authentication details.",
+    "lifetime": "1 hour"
+  },
+  {
+    "name": "Preference Cookie",
+    "description": "Saves user preferences like theme or language.",
+    "lifetime": "1 year"
+  }
+]
