@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   auth0_flutter: ^1.9.0
+  flutter_svg: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -93,3 +94,4 @@ flutter:
     - assets/privacy_policy.json
     - assets/cookies.json
     - assets/cookies_info.json
+    - assets/images/logo.svg

@@ -9,7 +9,6 @@ class NotFoundPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayoutWidget(
-      title: 'Page Not Found',
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

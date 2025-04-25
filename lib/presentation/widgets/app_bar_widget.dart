@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
 
-  const MainAppBarWidget({super.key, required this.title});
+  const MainAppBarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
-      backgroundColor: Colors.blue,
-
-
-      actions: [       
-        IconButton(
-          icon: const Icon(Icons.notifications),
-          onPressed: () {
-            // Implement notifications functionality here
-          },
-        ),
-      ],
+      title: Text("HESTIA"),
+      backgroundColor: Colors.white,   
+      elevation: 4.0,   
+      shadowColor: Colors.black,
+      leading: Center(child: SvgPicture.asset(
+        'assets/images/logo.svg',
+        width: 30,
+        height: 30,
+      ),),
+      
     );
   }
 

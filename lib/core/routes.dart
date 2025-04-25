@@ -6,6 +6,7 @@ enum Routes {
   notFound,
   cookies,
   privacy,
+  landingPage,
 }
 
 extension AppRoutesExtension on Routes {
@@ -25,6 +26,8 @@ extension AppRoutesExtension on Routes {
         return '/cookies';
       case Routes.privacy:
         return '/privacy';
+      case Routes.landingPage:
+        return '/landing-page';
     }
   }
 }

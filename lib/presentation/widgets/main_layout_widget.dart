@@ -4,17 +4,15 @@ import 'app_bar_widget.dart';
 
 class MainLayoutWidget extends StatelessWidget {
   final Widget body;
-  final String title;
 
-  const MainLayoutWidget({super.key, required this.body, required this.title});
+  const MainLayoutWidget({super.key, required this.body});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBarWidget(title: title),
-      drawer: MainDrawer(),
+      appBar: MainAppBarWidget(),
+      endDrawer: MainDrawer(),
       body: body,
-      
     );
   }
 }

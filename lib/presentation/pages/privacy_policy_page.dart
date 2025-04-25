@@ -17,7 +17,6 @@ class PrivacyPolicyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayoutWidget(
-      title: 'Privacy Policy',
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(

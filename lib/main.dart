@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(routerConfig: AppRouter.router, 
       title: Text(AppConstants.appName).data.toString(),      
       debugShowCheckedModeBanner: false,
+      
     );
   }
 
