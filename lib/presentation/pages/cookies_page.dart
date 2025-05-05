@@ -6,7 +6,9 @@ class CookiesPage extends StatelessWidget {
   const CookiesPage({super.key});
 
   Future<Map<String, String>> _loadIntroduction(BuildContext context) async {
-    final String jsonString = await DefaultAssetBundle.of(context).loadString('assets/cookies_info.json');
+    final String jsonString = await DefaultAssetBundle.of(
+      context,
+    ).loadString('assets/cookies_info.json');
     final Map<String, dynamic> jsonData = json.decode(jsonString);
     return {
       'title': jsonData['introduction']['title'] as String,
@@ -15,13 +17,19 @@ class CookiesPage extends StatelessWidget {
   }
 
   Future<List<Map<String, String>>> _loadCookies(BuildContext context) async {
-    final String jsonString = await DefaultAssetBundle.of(context).loadString('assets/cookies.json');
+    final String jsonString = await DefaultAssetBundle.of(
+      context,
+    ).loadString('assets/cookies.json');
     final List<dynamic> jsonData = json.decode(jsonString);
-    return jsonData.map((item) => {
-          'name': item['name'] as String,
-          'description': item['description'] as String,
-          'lifetime': item['lifetime'] as String,
-        }).toList();
+    return jsonData
+        .map(
+          (item) => {
+            'name': item['name'] as String,
+            'description': item['description'] as String,
+            'lifetime': item['lifetime'] as String,
+          },
+        )
+        .toList();
   }
 
   @override
@@ -37,19 +45,25 @@ class CookiesPage extends StatelessWidget {
             } else if (introSnapshot.hasError) {
               return const Center(child: Text('Failed to load introduction.'));
             } else if (!introSnapshot.hasData) {
-              return const Center(child: Text('No introduction data available.'));
+              return const Center(
+                child: Text('No introduction data available.'),
+              );
             }
 
             final introduction = introSnapshot.data!;
             return FutureBuilder<List<Map<String, String>>>(
               future: _loadCookies(context),
               builder: (context, cookiesSnapshot) {
-                if (cookiesSnapshot.connectionState == ConnectionState.waiting) {
+                if (cookiesSnapshot.connectionState ==
+                    ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (cookiesSnapshot.hasError) {
                   return const Center(child: Text('Failed to load cookies.'));
-                } else if (!cookiesSnapshot.hasData || cookiesSnapshot.data!.isEmpty) {
-                  return const Center(child: Text('No cookies data available.'));
+                } else if (!cookiesSnapshot.hasData ||
+                    cookiesSnapshot.data!.isEmpty) {
+                  return const Center(
+                    child: Text('No cookies data available.'),
+                  );
                 }
 
                 final cookies = cookiesSnapshot.data!;
@@ -59,7 +73,10 @@ class CookiesPage extends StatelessWidget {
                     children: [
                       Text(
                         introduction['title']!,
-                        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Text(
@@ -69,10 +86,15 @@ class CookiesPage extends StatelessWidget {
                       const SizedBox(height: 16),
                       const Text(
                         'Sample Cookies',
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const SizedBox(height: 16),
-                      CookiesTable(cookies: cookies), // Pass the loaded cookies here
+                      CookiesTable(
+                        cookies: cookies,
+                      ), // Pass the loaded cookies here
                     ],
                   ),
                 );
@@ -145,7 +167,7 @@ class CookiesTable extends StatelessWidget {
               ),
             ],
           );
-        }).toList(),
+        }),
       ],
     );
   }

@@ -11,7 +11,7 @@ class MainLayoutWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppBarWidget(),
-      endDrawer: MainDrawer(),
+      drawer: MainDrawer(),
       body: body,
     );
   }

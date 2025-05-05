@@ -11,13 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    return MaterialApp.router(routerConfig: AppRouter.router, 
-      title: Text(AppConstants.appName).data.toString(),      
+    return MaterialApp.router(
+      routerConfig: AppRouter.router,
+      title: Text(AppConstants.appName).data.toString(),
       debugShowCheckedModeBanner: false,
-      
     );
   }
-
 }
-
