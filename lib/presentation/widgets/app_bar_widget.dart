@@ -39,7 +39,7 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: const Icon(Icons.chat_outlined, color: Colors.black),
           onPressed: () {
-            // Implement logo action here
+            Scaffold.of(context).openEndDrawer();
           },
           tooltip: "Notifications",
         ),

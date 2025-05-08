@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hestia/presentation/widgets/main_drawer.dart';
+import 'package:hestia/presentation/widgets/notifications_drawer.dart';
 import 'app_bar_widget.dart';
 
 class MainLayoutWidget extends StatelessWidget {
@@ -12,6 +13,7 @@ class MainLayoutWidget extends StatelessWidget {
     return Scaffold(
       appBar: MainAppBarWidget(),
       drawer: MainDrawer(),
+      endDrawer: NotificationsDrawer(),
       body: body,
     );
   }
