@@ -13,17 +13,18 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   AuthService authService = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   var isLoading = false;
 
-  void _login() async {
+  Future<void> _login() async {
+    if (!_formKey.currentState!.validate()) return;
+
     setState(() {
       isLoading = true;
     });
-
-    //await Future.delayed(const Duration(seconds: 5));
 
     final success = await authService.login(
       usernameController.text,
@@ -38,9 +39,9 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         isLoading = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(success.$2)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(success.$2)));
     }
   }
 
@@ -62,56 +63,87 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-         SizedBox(
-                width: MediaQuery.of(context).size.width * 0.35,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 2.0,
-                    children: [
-                      const Text(
-                        'Login',
-                        style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                        ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.35,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 2.0,
+                  children: [
+                    const Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
                       ),
-                      const SizedBox(height: 32.0),  
-                      AuthenticationTextFormField(icon: Icons.person, label: "username", textEditingController: usernameController),
-                      const SizedBox(height: 16.0),
-                      AuthenticationTextFormField(icon: Icons.lock, label: "password", textEditingController: passwordController),
-                      const SizedBox(height: 16.0),
+                    ),
+                    const SizedBox(height: 32.0),
+                    AuthenticationTextFormField(
+                      icon: Icons.person,
+                      label: "username",
+                      textEditingController: usernameController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your username';
+                        }
+                        return null;
+                      },
+                    ),
 
-                         isLoading
-                            ? const CircularProgressIndicator(
-                                color: Colors.deepOrange,
-                                strokeWidth: 2.0,
-                              ) : ElevatedButton(
+                    const SizedBox(height: 16.0),
+                    AuthenticationTextFormField(
+                      icon: Icons.lock,
+                      label: "password",
+                      textEditingController: passwordController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16.0),
+
+                    isLoading
+                        ? const CircularProgressIndicator(
+                          color: Colors.deepOrange,
+                          strokeWidth: 2.0,
+                        )
+                        : ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size.fromHeight(50),
                             backgroundColor: Colors.deepOrange,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
-                            foregroundColor: Colors.white
+                            foregroundColor: Colors.white,
                           ),
                           onPressed: _login,
                           child: const Text('Login'),
                         ),
-                      TextButton(
-                        onPressed: forgotPassword,
-                        child: const Text('Forgot Password?', style: TextStyle(color: Colors.black)),
+                    TextButton(
+                      onPressed: forgotPassword,
+                      child: const Text(
+                        'Forgot Password?',
+                        style: TextStyle(color: Colors.black),
                       ),
+                    ),
 
-                      TextButton(
-                        onPressed: () => context.go(Routes.registre.path),
-                        child: const Text('Create Account', style: TextStyle(color: Colors.black)),
+                    TextButton(
+                      onPressed: () => context.go(Routes.registre.path),
+                      child: const Text(
+                        'Create Account',
+                        style: TextStyle(color: Colors.black),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
+            ),
+          ),
         ],
       ),
     );

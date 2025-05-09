@@ -6,13 +6,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 // The authentication status is stored in SharedPreferences, allowing the app to remember the user's login state across sessions.
 // The class provides methods to load the login status, set the login status, and save the login status to SharedPreferences.
 class AuthState extends ChangeNotifier {
-
   static final AuthState _instance = AuthState._internal();
 
   AuthState._internal();
 
   static AuthState get instance => _instance;
-  
+
   bool _loggedIn = false;
 
   bool get isLoggedIn => _loggedIn;
@@ -24,7 +23,7 @@ class AuthState extends ChangeNotifier {
 
   void setLoggedIn(bool value) {
     _loggedIn = value;
-    _saveLoginStatus(value); 
+    _saveLoginStatus(value);
     notifyListeners();
   }
 
