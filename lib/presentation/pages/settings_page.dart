@@ -8,7 +8,7 @@ class SettingsPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return MainLayoutWidget(
       body: const Center(
-        child: Text('Settings Page'),
+        child: Placeholder()
       ),
     );
   }

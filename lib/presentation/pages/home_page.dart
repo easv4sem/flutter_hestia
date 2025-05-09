@@ -7,7 +7,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayoutWidget(
-      body: Center()
+      body: Center(
+        child: Placeholder()
+      )
     );
 
 
