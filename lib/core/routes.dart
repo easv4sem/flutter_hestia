@@ -7,6 +7,7 @@ enum Routes {
   cookies,
   privacy,
   landingPage,
+  registre,
 }
 
 extension AppRoutesExtension on Routes {
@@ -28,6 +29,8 @@ extension AppRoutesExtension on Routes {
         return '/privacy';
       case Routes.landingPage:
         return '/landing-page';
+      case Routes.registre:
+        return '/registre';
     }
   }
 }
