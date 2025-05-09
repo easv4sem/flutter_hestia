@@ -18,26 +18,24 @@ class StyledDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: AppColors.backgroundColor, // your custom background
+        color: AppColors.backgroundColor,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             SizedBox(
-              height: 70,
-              child: header != null
-                  ? DefaultTextStyle(
-                      style: const TextStyle(
-                          color: AppColors.textColorLight, fontSize: 24),
-                      child: header!,
-                    )
-                  : const DrawerHeader(
-                      decoration: BoxDecoration(color: AppColors.primaryColor),
-                      child: Text(
-                        'PlaceHolder Header',
-                        style: TextStyle(
-                            color: AppColors.textColorLight, fontSize: 24),
-                      ),
-                    ),
+              height: kToolbarHeight,
+              child: Container(
+                color: AppColors.primaryColor,
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: DefaultTextStyle(
+                  style: const TextStyle(
+                    color: AppColors.textColorLight,
+                    fontSize: 24,
+                  ),
+                  child: header ?? const Text('PlaceHolder Header'),
+                ),
+              ),
             ),
             ...children,
           ],
