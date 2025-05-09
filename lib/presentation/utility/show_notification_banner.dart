@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hestia/styles/notification_banner_styles.dart';
+import 'package:hestia/theme/notification_banner_styles.dart';
 
 /// A helper class to display a notification banner at the top of the screen.
 ///

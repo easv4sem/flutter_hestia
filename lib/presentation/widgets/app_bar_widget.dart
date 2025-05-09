@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hestia/core/routes.dart';
 import 'package:hestia/presentation/utility/show_notification_banner.dart';
-import 'package:hestia/styles/notification_banner_styles.dart';
+import 'package:hestia/theme/colors.dart';
+import 'package:hestia/theme/notification_banner_styles.dart';
 
 class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBarWidget({super.key});
@@ -14,9 +15,9 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         child: Text("HESTIA"),
         onTap: () => context.go(Routes.home.path),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundColor,
       elevation: 4.0,
-      shadowColor: Colors.black,
+      shadowColor: AppColors.secondaryColor,
       actions: [
         IconButton(
           icon: const Icon(Icons.warning_outlined, color: Colors.black),

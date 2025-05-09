@@ -17,11 +17,15 @@ class NotificationsDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blue),
-            child: Text(
-              'Notifications',
-              style: TextStyle(color: Colors.white, fontSize: 24),
+          Container(
+            height: 70,
+            child: const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.orange),
+              
+              child: Text(
+                'Notifications',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
             ),
           ),
           ListTile(
@@ -34,9 +38,12 @@ class NotificationsDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.notifications),
             title: const Text('Notification 2'),
+            subtitle: const Text('This is a description of notification'),
+
             onTap: () {
               // Handle notification tap
             },
+
           ),
         ],
       ),
