@@ -10,4 +10,10 @@ class AppIcons {
   static const fire = Icons.local_fire_department_outlined;
   static const offline = Icons.signal_wifi_off_outlined;
 
+  static const settings = Icons.settings_outlined;
+  static const home = Icons.home_outlined;
+  static const cookies = Icons.cookie_outlined;
+  static const privacy = Icons.privacy_tip_outlined;
+  static const notificationBell = Icons.notifications_outlined;
+
 }
