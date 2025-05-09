@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hestia/theme/colors.dart';
 
 class NotificationTile extends StatelessWidget {
   final String title;
