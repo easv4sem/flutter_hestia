@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dio/browser.dart';
-import 'package:hestia/core/app_constants.dart'; // Required for web support
+import 'package:hestia/core/app_constants.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // Required for web support
 
 class AuthService {
   final Dio _dio =
@@ -16,7 +17,7 @@ class AuthService {
     }
   }
 
-  Future<bool> login(String username, String password) async {
+  Future<(bool, String)> login(String username, String password) async {
     try {
       final response = await _dio.post(
         '/user/login',
@@ -24,13 +25,19 @@ class AuthService {
       );
 
       if (response.statusCode == 200) {
-        return true;
+        // Save the login status in SharedPreferences
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('loggedIn', true);
+
+        return (true, "Successfully logged in");
       } else {
-        return false;
+        return (false, "Unknown error");
       }
-    } catch (e) {
-      print('Login error: $e');
-      return false;
+    } on DioException catch (e) {
+     if (e.response?.statusCode == 404) {
+        return (false, "Username or password is wrong");
+      } 
+      return (false, "Unknown error");
     }
   }
 
@@ -54,6 +61,11 @@ class AuthService {
       );
 
       if (response.statusCode == 201) {
+        
+        // Save the login status in SharedPreferences
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('loggedIn', true);
+        
         return (true, "Successfully registered");
       } else {
         return (false, "Unknown error");
@@ -73,6 +85,9 @@ class AuthService {
       final response = await _dio.post('/user/logout');
 
       if (response.statusCode == 200) {
+        // Clear the login status from SharedPreferences
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('loggedIn', false);
         return true;
       } else {
         return false;

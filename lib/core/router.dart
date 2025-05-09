@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hestia/auth/auth_provider.dart';
 import 'package:hestia/presentation/pages/cookies_page.dart';
 import 'package:hestia/presentation/pages/home_page.dart';
 import 'package:hestia/presentation/pages/landing_page.dart';
@@ -13,52 +15,49 @@ import 'routes.dart';
 /// It defines the routes and their corresponding pages.
 /// pages are imported from the pages enum.
 class AppRouter {
+  
+  static bool devMode = true;
+
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.home.path, // Set the initial route to HomePage
-    errorBuilder:
-        (context, state) =>
-            const NotFoundPage(), // Handle 404 errors with NotFoundPage
+    initialLocation: Routes.home.path,
+    refreshListenable: GoRouterRefreshNotifier(AuthState.instance),
+
+    redirect: devMode
+        ? null // Slå redirect fra i devMode
+        : (context, state) {
+            final loggedIn = AuthState.instance.isLoggedIn;
+            final isOnLogin = state.uri.path == Routes.login.path;
+            final isOnRegister = state.uri.path == Routes.registre.path;
+            final isOnLandingPage = state.uri.path == Routes.landingPage.path;
+
+            if (!loggedIn && !(isOnLogin || isOnRegister || isOnLandingPage)) {
+              return Routes.login.path;
+            }
+
+            if (loggedIn && (isOnLogin || isOnRegister)) {
+              return Routes.home.path;
+            }
+
+            return null;
+          },
+
+    errorBuilder: (context, state) => const NotFoundPage(),
+
     routes: [
-      GoRoute(
-        path: Routes.home.path,
-        name: Routes.home.name,
-        builder: (context, state) => const HomePage(),
-      ),
-      GoRoute(
-        path: Routes.settings.path,
-        name: Routes.settings.name,
-        builder: (context, state) => const SettingsPage(),
-      ),
-      GoRoute(
-        path: Routes.cookies.path,
-        name: Routes.cookies.name,
-        builder: (context, state) => const CookiesPage(),
-      ),
-      GoRoute(
-        path: Routes.privacy.path,
-        name: Routes.privacy.name,
-        builder: (context, state) => const PrivacyPolicyPage(),
-      ),
-      GoRoute(
-        path: Routes.notFound.path,
-        name: Routes.notFound.name,
-        builder: (context, state) => const NotFoundPage(),
-      ),
-      GoRoute(
-        path: Routes.landingPage.path,
-        name: Routes.landingPage.name,
-        builder: (context, state) => const LandingPage(),
-      ),
-      GoRoute(
-        path: Routes.login.path,
-        name: Routes.login.name,
-        builder: (context, state) => const LoginPage(),
-      ),
-      GoRoute(
-        path: Routes.registre.path,
-        name: Routes.registre.name,
-        builder: (context, state) => const RegistrePage(),
-      ),
+      GoRoute(path: Routes.home.path, builder: (context, _) => const HomePage()),
+      GoRoute(path: Routes.settings.path, builder: (context, _) => const SettingsPage()),
+      GoRoute(path: Routes.cookies.path, builder: (context, _) => const CookiesPage()),
+      GoRoute(path: Routes.privacy.path, builder: (context, _) => const PrivacyPolicyPage()),
+      GoRoute(path: Routes.landingPage.path, builder: (context, _) => const LandingPage()),
+      GoRoute(path: Routes.login.path, builder: (context, _) => const LoginPage()),
+      GoRoute(path: Routes.registre.path, builder: (context, _) => const RegistrePage()),
     ],
   );
+}
+
+
+class GoRouterRefreshNotifier extends ChangeNotifier {
+  GoRouterRefreshNotifier(Listenable listenable) {
+    listenable.addListener(notifyListeners);
+  }
 }

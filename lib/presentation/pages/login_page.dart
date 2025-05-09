@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hestia/auth/auth_service.dart';
 import 'package:hestia/core/routes.dart';
+import 'package:hestia/presentation/widgets/authentication_text_form_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,13 +23,13 @@ class _LoginPageState extends State<LoginPage> {
       isLoading = true;
     });
 
-    await Future.delayed(const Duration(seconds: 5));
+    //await Future.delayed(const Duration(seconds: 5));
 
     final success = await authService.login(
       usernameController.text,
       passwordController.text,
     );
-    if (success) {
+    if (success.$1) {
       setState(() {
         isLoading = false;
       });
@@ -38,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
         isLoading = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login failed. Please try again.')),
+        SnackBar(content: Text(success.$2)),
       );
     }
   }
@@ -61,12 +62,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          isLoading
-              ? SizedBox(
-                width: MediaQuery.of(context).size.width * 0.35,
-                child: Center(child: CircularProgressIndicator()),
-              )
-              : SizedBox(
+         SizedBox(
                 width: MediaQuery.of(context).size.width * 0.35,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -81,37 +77,36 @@ class _LoginPageState extends State<LoginPage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      TextField(
-                        controller: usernameController,
-                        decoration: InputDecoration(
-                          labelText: 'Username',
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
+                      const SizedBox(height: 32.0),  
+                      AuthenticationTextFormField(icon: Icons.person, label: "username", textEditingController: usernameController),
+                      const SizedBox(height: 16.0),
+                      AuthenticationTextFormField(icon: Icons.lock, label: "password", textEditingController: passwordController),
                       const SizedBox(height: 16.0),
 
-                      TextField(
-                        controller: passwordController,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          border: OutlineInputBorder(),
+                         isLoading
+                            ? const CircularProgressIndicator(
+                                color: Colors.deepOrange,
+                                strokeWidth: 2.0,
+                              ) : ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size.fromHeight(50),
+                            backgroundColor: Colors.deepOrange,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            foregroundColor: Colors.white
+                          ),
+                          onPressed: _login,
+                          child: const Text('Login'),
                         ),
-                        obscureText: true,
-                      ),
-
-                      ElevatedButton(
-                        onPressed: _login,
-                        child: const Text('Login'),
-                      ),
-
                       TextButton(
                         onPressed: forgotPassword,
-                        child: const Text('Forgot Password?'),
+                        child: const Text('Forgot Password?', style: TextStyle(color: Colors.black)),
                       ),
 
                       TextButton(
                         onPressed: () => context.go(Routes.registre.path),
-                        child: const Text('Create Account'),
+                        child: const Text('Create Account', style: TextStyle(color: Colors.black)),
                       ),
                     ],
                   ),

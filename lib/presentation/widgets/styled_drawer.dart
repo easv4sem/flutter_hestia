@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class StyledDrawer extends StatelessWidget {
   final Widget? header;
