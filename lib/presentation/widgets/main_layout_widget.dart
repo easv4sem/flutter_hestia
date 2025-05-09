@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hestia/presentation/widgets/main_drawer.dart';
 import 'package:hestia/presentation/widgets/notifications_drawer.dart';
+import 'package:hestia/presentation/widgets/styled_drawer.dart';
 import 'package:hestia/theme/colors.dart';
 import 'app_bar_widget.dart';
 
@@ -15,7 +16,7 @@ class MainLayoutWidget extends StatelessWidget {
       backgroundColor: AppColors.backgroundColor,
       appBar: MainAppBarWidget(),
       drawer: MainDrawer(),
-      endDrawer: NotificationsDrawer(),
+      endDrawer: StyledDrawer(),
       body: body,
     );
   }

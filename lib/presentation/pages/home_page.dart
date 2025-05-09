@@ -11,8 +11,6 @@ class HomePage extends StatelessWidget {
         child: Placeholder()
       )
     );
-
-
   }
   
 }
