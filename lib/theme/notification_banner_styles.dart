@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hestia/theme/colors.dart';
+import 'package:hestia/theme/icons.dart';
 
 /// Defines the types of notification banners available in the app.
 /// Each type maps to a specific color and icon style.
@@ -38,12 +39,12 @@ class BannerStyles {
   };
 
   final Map<NotificationBannerType, IconData> icons = {
-    NotificationBannerType.error: Icons.error_outline,
-    NotificationBannerType.warning: Icons.warning_amber_outlined,
-    NotificationBannerType.info: Icons.info_outline,
-    NotificationBannerType.success: Icons.check_circle_outline,
-    NotificationBannerType.fire: Icons.local_fire_department_outlined,
-    NotificationBannerType.offline: Icons.signal_wifi_off_outlined,
+    NotificationBannerType.error: AppIcons.error,
+    NotificationBannerType.warning: AppIcons.warning,
+    NotificationBannerType.info: AppIcons.info,
+    NotificationBannerType.success: AppIcons.success,
+    NotificationBannerType.fire: AppIcons.fire,
+    NotificationBannerType.offline: AppIcons.offline,
   };
 
   final Map<NotificationBannerType, String> messages  = {
