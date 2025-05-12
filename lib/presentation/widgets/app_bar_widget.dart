@@ -59,14 +59,14 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               },
               tooltip: "Notifications",
             ),
-            if (notifications.notifications.isNotEmpty)
+            if (notifications.unreadNotifications.isNotEmpty)
               Positioned(
                 right: 0,
                 child: CircleAvatar(
                   radius: 10,
                   backgroundColor: AppColors.primaryColor,
                   child: Text(
-                    notifications.notifications.length.toString(),
+                    notifications.unreadNotifications.length.toString(),
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),
