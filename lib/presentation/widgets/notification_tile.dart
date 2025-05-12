@@ -19,10 +19,10 @@ class NotificationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(this.title),
-      subtitle: Text(this.subtitle),
+      title: Text(title),
+      subtitle: Text(subtitle),
       trailing: IconButton(
-        icon: Icon(this.icon),
+        icon: Icon(icon),
         onPressed: onPressed,
       ),
       tileColor: tileColor,

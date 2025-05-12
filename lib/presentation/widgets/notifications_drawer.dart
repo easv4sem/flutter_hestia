@@ -24,8 +24,23 @@ class _NotificationsDrawerState extends State<NotificationsDrawer> {
         {'title': 'New Notification 2', 'subtitle': 'Description of notification 2', 'icon': AppIcons.fire, 'tileColor': AppColors.fire},
         {'title': 'New Notification 3', 'subtitle': 'Description of notification 3', 'icon': AppIcons.warning, 'tileColor': AppColors.warning},
         {'title': 'New Notification 6', 'subtitle': 'Description of notification 6', 'icon': AppIcons.error, 'tileColor': AppColors.error},
-        // Add more notifications as needed
-      ];
+        {'title': 'New Notification 4', 'subtitle': 'Description of notification 4', 'icon': AppIcons.notificationBell, 'tileColor': AppColors.info},
+        {'title': 'New Notification 5', 'subtitle': 'Description of notification 5', 'icon': AppIcons.fire, 'tileColor': AppColors.fire},
+        {'title': 'New Notification 7', 'subtitle': 'Description of notification 7', 'icon': AppIcons.warning, 'tileColor': AppColors.warning},
+        {'title': 'New Notification 8', 'subtitle': 'Description of notification 8', 'icon': AppIcons.error, 'tileColor': AppColors.error},
+        {'title': 'New Notification 9', 'subtitle': 'Description of notification 9', 'icon': AppIcons.notificationBell, 'tileColor': AppColors.info},
+        {'title': 'New Notification 10', 'subtitle': 'Description of notification 10', 'icon': AppIcons.fire, 'tileColor': AppColors.fire},
+        {'title': 'New Notification 11', 'subtitle': 'Description of notification 11', 'icon': AppIcons.warning, 'tileColor': AppColors.warning},
+        {'title': 'New Notification 12', 'subtitle': 'Description of notification 12', 'icon': AppIcons.error, 'tileColor': AppColors.error},
+        {'title': 'New Notification 13', 'subtitle': 'Description of notification 13', 'icon': AppIcons.notificationBell, 'tileColor': AppColors.info},
+        {'title': 'New Notification 14', 'subtitle': 'Description of notification 14', 'icon': AppIcons.fire, 'tileColor': AppColors.fire},
+        {'title': 'New Notification 15', 'subtitle': 'Description of notification 15', 'icon': AppIcons.warning, 'tileColor': AppColors.warning},
+        {'title': 'New Notification 16', 'subtitle': 'Description of notification 16', 'icon': AppIcons.error, 'tileColor': AppColors.error},
+        {'title': 'New Notification 17', 'subtitle': 'Description of notification 17', 'icon': AppIcons.notificationBell, 'tileColor': AppColors.info},
+        {'title': 'New Notification 18', 'subtitle': 'Description of notification 18', 'icon': AppIcons.fire, 'tileColor': AppColors.fire},
+        {'title': 'New Notification 19', 'subtitle': 'Description of notification 19', 'icon': AppIcons.warning, 'tileColor': AppColors.warning},
+        {'title': 'New Notification 20', 'subtitle': 'Description of notification 20', 'icon': AppIcons.error, 'tileColor': AppColors.error},
+        ];
     });
   }
 
