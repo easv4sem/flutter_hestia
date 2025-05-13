@@ -17,11 +17,11 @@ class NotificationsDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          Container(
+          SizedBox(
             height: 70,
             child: const DrawerHeader(
               decoration: BoxDecoration(color: Colors.orange),
-              
+
               child: Text(
                 'Notifications',
                 style: TextStyle(color: Colors.white, fontSize: 24),
@@ -43,11 +43,9 @@ class NotificationsDrawer extends StatelessWidget {
             onTap: () {
               // Handle notification tap
             },
-
           ),
         ],
       ),
     );
   }
-
 }

@@ -11,25 +11,24 @@ class StyledDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          Container(
+          SizedBox(
             height: 70,
-            child: header != null 
-                ? DefaultTextStyle(
-                    style: const TextStyle(color: Colors.white, fontSize: 24),
-                    child: header!,
-                  )
-                : const DrawerHeader(
-                    decoration: BoxDecoration(color: Colors.blue),
-                    child: Text(
-                      'PlaceHolder Header',
-                      style: TextStyle(color: Colors.white, fontSize: 24),
+            child:
+                header != null
+                    ? DefaultTextStyle(
+                      style: const TextStyle(color: Colors.white, fontSize: 24),
+                      child: header!,
+                    )
+                    : const DrawerHeader(
+                      decoration: BoxDecoration(color: Colors.blue),
+                      child: Text(
+                        'PlaceHolder Header',
+                        style: TextStyle(color: Colors.white, fontSize: 24),
+                      ),
                     ),
-                  ),
           ),
-
         ],
       ),
     );
   }
-
 }

@@ -8,6 +8,7 @@ enum Routes {
   privacy,
   landingPage,
   registre,
+  devices,
 }
 
 extension AppRoutesExtension on Routes {
@@ -31,6 +32,8 @@ extension AppRoutesExtension on Routes {
         return '/landing-page';
       case Routes.registre:
         return '/registre';
+      case Routes.devices:
+        return '/devices';
     }
   }
 }
