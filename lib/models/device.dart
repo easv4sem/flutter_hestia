@@ -9,7 +9,7 @@ class Device {
   final String? version;
   final DateTime? lastHeartbeat;
   final num? port;
-  final DeviceState? mode; // maybe 'Connected', 'OK', etc.
+  final DeviceState mode;
 
   Device({
     required this.displayName,
@@ -34,20 +34,22 @@ class Device {
       version: json['Version'] as String?,
       lastHeartbeat:
           json['LastHeartbeat'] != null
-              ? DateTime.parse(json['LastHeartbeat'])
+              ? DateTime.tryParse(json['LastHeartbeat'])
               : null,
-      mode: json['mode'] as DeviceState? ?? DeviceState.offline,
+      mode: _parseDeviceState(json['Mode']),
     );
   }
 
-  Map<String, dynamic> toDisplayMap() {
-    return {
-      'name': displayName,
-      'details': 'IP: $ip, MAC: $mac, Version: $version, Port: $port',
-      'longitude': longitude,
-      'latitude': latitude,
-      'lasthardbeat': lastHeartbeat,
-      'mode': mode ?? DeviceState.offline,
-    };
+  static DeviceState _parseDeviceState(dynamic value) {
+    if (value is int && value >= 0 && value < DeviceState.values.length) {
+      return DeviceState.values[value];
+    }
+    if (value is String) {
+      return DeviceState.values.firstWhere(
+        (e) => e.name.toLowerCase() == value.toLowerCase(),
+        orElse: () => DeviceState.offline,
+      );
+    }
+    return DeviceState.offline;
   }
 }

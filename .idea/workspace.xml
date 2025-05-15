@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="70ae3ac5-a0d4-4ce5-8db8-535505c0819b" name="Changes" comment="">
+    <list default="true" id="70ae3ac5-a0d4-4ce5-8db8-535505c0819b" name="Changes" comment="refactor: Replace `mode` field with `DeviceState` enum and set default value&#10;&#10;- Updated `mode` field in the `Device` model to use `DeviceState?` instead of `String?`.&#10;- Set the default value of `mode` to `DeviceState.offline`.&#10;- Adjusted `fromJson` and `toJson` methods to reflect the changes.">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/widgets/notifications_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/widgets/notifications_drawer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/widgets/styled_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/widgets/styled_drawer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hestia.iml" beforeDir="false" afterPath="$PROJECT_DIR$/hestia.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,22 +64,30 @@
     <option name="showLibraryContents" value="true" />
     <option name="sortKey" value="BY_TIME_DESCENDING" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feat/login-stylinge&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/elias/Desktop/CS/3. semester/EKSAMEN/flutter_hestia&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "feat/load-devices",
+    "last_opened_file_path": "C:/Users/elias/Desktop/CS/3. semester/EKSAMEN/flutter_hestia",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RunManager">
+    <configuration name="main.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
+      <option name="workingDirectory" value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -97,7 +104,17 @@
       <updated>1746877195154</updated>
       <workItem from="1746877197104" duration="173000" />
       <workItem from="1747031647540" duration="10000" />
+      <workItem from="1747293251433" duration="294000" />
     </task>
+    <task id="LOCAL-00001" summary="refactor: Replace `mode` field with `DeviceState` enum and set default value&#10;&#10;- Updated `mode` field in the `Device` model to use `DeviceState?` instead of `String?`.&#10;- Set the default value of `mode` to `DeviceState.offline`.&#10;- Adjusted `fromJson` and `toJson` methods to reflect the changes.">
+      <option name="closed" value="true" />
+      <created>1747293287296</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1747293287296</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -108,5 +125,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="refactor: Replace `mode` field with `DeviceState` enum and set default value&#10;&#10;- Updated `mode` field in the `Device` model to use `DeviceState?` instead of `String?`.&#10;- Set the default value of `mode` to `DeviceState.offline`.&#10;- Adjusted `fromJson` and `toJson` methods to reflect the changes." />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: Replace `mode` field with `DeviceState` enum and set default value&#10;&#10;- Updated `mode` field in the `Device` model to use `DeviceState?` instead of `String?`.&#10;- Set the default value of `mode` to `DeviceState.offline`.&#10;- Adjusted `fromJson` and `toJson` methods to reflect the changes." />
   </component>
 </project>
