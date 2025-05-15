@@ -9,4 +9,5 @@ enum EnumAppNotificationType {
   fire,
   offline,
   notification,
+  type,
 }

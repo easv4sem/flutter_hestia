@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hestia/models/enum_app_notification_type.dart';
 
 /// <--- Change colors here to update the app's theme. --->
 /// 
@@ -25,4 +26,23 @@ class AppColors {
   static const fire = Color(0xFFB71C1C);
   static const offline = Colors.grey; 
 
+
+  static Color getNotificationColorByType(EnumAppNotificationType type) {
+    switch (type) {
+      case EnumAppNotificationType.error:
+        return error;
+      case EnumAppNotificationType.warning:
+        return warning;
+      case EnumAppNotificationType.info:
+        return info;
+      case EnumAppNotificationType.success:
+        return success;
+      case EnumAppNotificationType.fire:
+        return fire;
+      case EnumAppNotificationType.offline:
+        return offline;
+      default:
+        return Colors.grey;
+    }
+  }
 }

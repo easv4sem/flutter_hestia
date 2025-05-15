@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hestia/core/routes.dart';
@@ -16,7 +18,10 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final notifications = context.watch<AppNotification>();
-    
+    final Random random = Random();
+    final int randomIndex = random.nextInt(3);
+
+
     return AppBar(
       title: GestureDetector(
         child: Text("HESTIA"),
@@ -35,13 +40,36 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: const Icon(Icons.warning_outlined, color: Colors.black),
           onPressed: () {
-            notifications.addNotification(
-              AppNotificationItem(
-                title: "Example Notification.",
-                subtitle: "This is an example notification message.",
-                type: EnumAppNotificationType.error,
-              )
-            );
+            switch (randomIndex) {
+              case 0:
+                notifications.addNotification(
+                  AppNotificationItem(
+                    title: "Example Notification.",
+                    subtitle: "This is an example notification message.",
+                    type: EnumAppNotificationType.warning,
+                  )
+                );
+                break;
+              case 1:
+                notifications.addNotification(
+                  AppNotificationItem(
+                    title: "Example Notification.",
+                    subtitle: "This is an example notification message.",
+                    type: EnumAppNotificationType.info,
+                  )
+                );
+                break;
+              case 2:
+                notifications.addNotification(
+                  AppNotificationItem(
+                    title: "Example Notification.",
+                    subtitle: "This is an example notification message.",
+                    type: EnumAppNotificationType.success,
+                  )
+                );
+                break;
+            }
+            
             ShowNotificationBanner.showNotificationTop(
               context,
               type: NotificationBannerType.error,
