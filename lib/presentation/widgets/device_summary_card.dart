@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hestia/theme/colors.dart';
 
 class DeviceSummaryCard extends StatelessWidget {
   final String title;
@@ -19,7 +20,7 @@ class DeviceSummaryCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Colors.white,
+        color: AppColors.backgroundColor,
         boxShadow: [
           BoxShadow(
             color: const Color.fromARGB(28, 0, 0, 0),
@@ -40,8 +41,8 @@ class DeviceSummaryCard extends StatelessWidget {
               Text(
                 title,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.textColorDark,
                 ),
               ),
               const SizedBox(height: 8),

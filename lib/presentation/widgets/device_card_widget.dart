@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hestia/models/device.dart';
 import 'package:hestia/models/device_state.dart';
+import 'package:hestia/theme/colors.dart';
 
 class DeviceCardWidget extends StatelessWidget {
   final Device device;
@@ -14,6 +15,11 @@ class DeviceCardWidget extends StatelessWidget {
       child: ListTile(
         contentPadding: const EdgeInsets.all(16.0),
         title: Text(device.displayName),
+        tileColor: AppColors.backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          side: BorderSide(color: Colors.transparent, width: 2.0),
+        ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -25,6 +31,7 @@ class DeviceCardWidget extends StatelessWidget {
             ),
             Text(
               'Last Heartbeat: ${device.lastHeartbeat?.toString().split('.').first}',
+
               style: const TextStyle(fontSize: 12.0),
             ),
             Text(
@@ -40,7 +47,7 @@ class DeviceCardWidget extends StatelessWidget {
           ),
           child: SizedBox(width: 50, height: 50, child: Icon(Icons.device_hub)),
         ),
-        trailing: const Icon(Icons.arrow_forward),
+        trailing: Icon(Icons.arrow_forward, color: device.mode.color),
         onTap: () {
           // TODO: Handle device tap
         },

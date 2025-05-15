@@ -17,7 +17,7 @@ import 'routes.dart';
 /// It defines the routes and their corresponding pages.
 /// pages are imported from the pages enum.
 class AppRouter {
-  static bool devMode = true;
+  static bool devMode = false;
 
   static final GoRouter router = GoRouter(
     initialLocation: Routes.home.path,
@@ -80,9 +80,9 @@ class AppRouter {
         builder: (context, _) => const DevicesPage(),
       ),
       GoRoute(
-        path: Routes.notifications.path, 
-        name: Routes.notifications.name, 
-        builder: (context, state) => const NotificationsPage()
+        path: Routes.notifications.path,
+        name: Routes.notifications.name,
+        builder: (context, state) => const NotificationsPage(),
       ),
     ],
   );
