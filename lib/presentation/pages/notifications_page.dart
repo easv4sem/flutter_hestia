@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:hestia/models/app_notification.dart';
+import 'package:hestia/models/app_notification_provider.dart';
 import 'package:hestia/models/enum_app_notification_type.dart';
 import 'package:hestia/presentation/widgets/main_layout_widget.dart';
 import 'package:hestia/presentation/widgets/notifications_simplerow.dart';
@@ -12,7 +12,7 @@ class NotificationsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notifications = context.watch<AppNotification>();
+    final notifications = context.watch<AppNotificationProvider>();
 
     final Map<EnumAppNotificationType, int> typeCounts = {};
     for (var notif in notifications.notifications) {
@@ -20,6 +20,9 @@ class NotificationsPage extends StatelessWidget {
     }
 
     final total = notifications.notifications.length;
+
+    final sortedNotifications = List.from(notifications.notifications)
+    ..sort((a, b) => b.date.compareTo(a.date)); // newest first
 
     final List<PieChartSectionData> pieSections = total > 0
         ? typeCounts.entries.map((entry) {
@@ -141,7 +144,7 @@ class NotificationsPage extends StatelessWidget {
                       Expanded(
                         child: ListView.builder(
                           itemBuilder: (context, index) {
-                            final item = notifications.notifications[index];
+                            final item = sortedNotifications[index];
                             return Container(
                               decoration: BoxDecoration(
                                 border: Border(
@@ -151,10 +154,10 @@ class NotificationsPage extends StatelessWidget {
                                 color: item.isRead
                                     ? AppColors.getNotificationColorByType(item.type).withValues(
                                         alpha: 0.6,
-                                    )
+                                      )
                                     : AppColors.primaryColor.withValues(
                                         alpha: 0.7,
-                                    ),
+                                      ),
                               ),
                               margin: const EdgeInsets.symmetric(vertical: 4),
                               child: Column(
@@ -170,7 +173,7 @@ class NotificationsPage extends StatelessWidget {
                               ),
                             );
                           },
-                          itemCount: notifications.notifications.length,
+                          itemCount: sortedNotifications.length,
                         ),
                       ),
                     ],
@@ -191,7 +194,7 @@ class StatsNotificationCount extends StatefulWidget {
     required this.notifications,
   });
 
-  final AppNotification notifications;
+  final AppNotificationProvider notifications;
 
   @override
   State<StatsNotificationCount> createState() => _StatsNotificationCountState();
@@ -210,13 +213,13 @@ class _StatsNotificationCountState extends State<StatsNotificationCount> {
         child: IntrinsicHeight(
           child: Row(
             children: [
-              CounterSimplecolumn(title: 'Total Today', count: widget.notifications.unreadNotifications.length),
+              CounterSimplecolumn(title: 'Total Today', count: widget.notifications.todayCount),
               VerticalDivider(
                 color: AppColors.accentColor,
                 thickness: 1,
                 width: 20,
               ),
-              CounterSimplecolumn(title: 'Total 7 Days', count: widget.notifications.unreadNotifications.length),
+              CounterSimplecolumn(title: 'Total 7 Days', count: widget.notifications.last7DaysCount),
             ],
           ),
         ),

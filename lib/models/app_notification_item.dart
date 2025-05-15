@@ -6,7 +6,7 @@ class AppNotificationItem extends ChangeNotifier {
   final String title;
   final String subtitle;
   final EnumAppNotificationType type;
-  final DateTime now = DateTime.now();
+  DateTime date;
   final String formatted = DateFormat('HH:mm:ss - dd/MM/yyyy').format(DateTime.now());
   bool isRead;
 
@@ -14,8 +14,9 @@ class AppNotificationItem extends ChangeNotifier {
     required this.title,
     required this.subtitle,
     required this.type,
+    DateTime? date,
     this.isRead = false,
-  });
+  }) : date = date ?? DateTime.now();
 
   set read(bool value) {
     isRead = value;

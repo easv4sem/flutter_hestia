@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hestia/core/routes.dart';
-import 'package:hestia/models/app_notification.dart';
+import 'package:hestia/models/app_notification_provider.dart';
 import 'package:hestia/models/app_notification_item.dart';
 import 'package:hestia/models/enum_app_notification_type.dart';
 import 'package:hestia/presentation/utility/show_notification_banner.dart';
@@ -17,7 +17,7 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notifications = context.watch<AppNotification>();
+    final notifications = context.watch<AppNotificationProvider>();
     final Random random = Random();
     final int randomIndex = random.nextInt(4);
 

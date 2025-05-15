@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hestia/models/app_notification.dart';
+import 'package:hestia/models/app_notification_provider.dart';
 import 'package:hestia/models/enum_app_notification_type.dart';
 import 'package:hestia/theme/colors.dart';
 import 'package:hestia/theme/icons.dart';
@@ -23,38 +23,42 @@ class _NotificationsDrawerState extends State<NotificationsDrawer> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final notifications = context.watch<AppNotification>();
+Widget build(BuildContext context) {
+  final notifications = context.watch<AppNotificationProvider>();
 
-    return StyledDrawer(
-      
-      header: const Text(
-        'Notifications',
-        style: TextStyle(color: Colors.white, fontSize: 24),
-      ),
-      children: List.generate(notifications.unreadNotifications.length, (index) {
-        final item = notifications.unreadNotifications[index];
+  // Sort unread notifications by newest first
+  final sortedUnreadNotifications = List.from(notifications.unreadNotifications)
+    ..sort((a, b) => b.date.compareTo(a.date)); // Use `now` timestamp
 
-        if (item.isRead) {
-          return const SizedBox.shrink(); // Skip read notifications
-        }
+  return StyledDrawer(
+    header: const Text(
+      'Notifications',
+      style: TextStyle(color: Colors.white, fontSize: 24),
+    ),
+    children: List.generate(sortedUnreadNotifications.length, (index) {
+      final item = sortedUnreadNotifications[index];
 
-        return NotificationTile(
-          title: item.title,
-          subtitle: item.subtitle,
-          icon: getNotificationIcon(item.type),
-          tileColor: AppColors.backgroundColor, // Assigning color dynamically
-          onPressed: () {
-            notifications.markAsRead(item);
-            item.isRead = true;
-            debugPrint(
-              'Notification removed: ${item.title} : ${item.isRead}',
-            );
-          },
-        );
-      }),
-    );
-  }
+      if (item.isRead) {
+        return const SizedBox.shrink(); // Skip read notifications
+      }
+
+      return NotificationTile(
+        title: item.title,
+        subtitle: item.subtitle,
+        icon: getNotificationIcon(item.type),
+        tileColor: AppColors.backgroundColor,
+        onPressed: () {
+          notifications.markAsRead(item);
+          item.isRead = true;
+          debugPrint(
+            'Notification removed: ${item.title} : ${item.isRead}',
+          );
+        },
+      );
+    }),
+  );
+}
+
 
 /// Function to get the icon based on notification type
 /// This function maps the EnumAppNotificationType to the corresponding icon.

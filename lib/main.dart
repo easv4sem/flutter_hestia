@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hestia/core/router.dart';
 import 'package:hestia/core/app_constants.dart';
-import 'package:hestia/models/app_notification.dart';
+import 'package:hestia/models/app_notification_provider.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
 
@@ -12,8 +12,8 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<AppNotification>.value(
-          value: AppNotification.instance,
+        ChangeNotifierProvider<AppNotificationProvider>.value(
+          value: AppNotificationProvider.instance,
         ),
       ],
       child: const MyApp(),
