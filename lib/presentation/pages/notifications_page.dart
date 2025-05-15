@@ -25,7 +25,9 @@ class NotificationsPage extends StatelessWidget {
         ? typeCounts.entries.map((entry) {
             final percentage = ((entry.value / total) * 100).toStringAsFixed(0);
             return PieChartSectionData(
-              color: AppColors.getNotificationColorByType(entry.key),
+              color: AppColors.getNotificationColorByType(entry.key).withValues(
+                alpha: 0.7,
+              ),
               title: '${entry.key.name}\n$percentage%',
               value: entry.value.toDouble(),
               radius: 80,
@@ -41,25 +43,34 @@ class NotificationsPage extends StatelessWidget {
     return MainLayoutWidget(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(50.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Statistics'.toUpperCase(),
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 194, 194, 194),
-                        ),
-                      ),
-                      StatsNotificationCount(notifications: notifications),
-                    ],
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Statistics'.toUpperCase(),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 194, 194, 194),
                   ),
+                ),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        StatsNotificationCount(notifications: notifications),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 20),
                   Container(
                     decoration: BoxDecoration(
                       color: AppColors.backgroundColor,
@@ -80,14 +91,14 @@ class NotificationsPage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              height: 300,
-                              width: 300,
+                              height: 200,
+                              width: 200,
                               child: pieSections.isEmpty
                                   ? const Center(child: Text('No data'))
                                   : PieChart(
                                       PieChartData(
                                         sections: pieSections,
-                                        centerSpaceRadius: 30,
+                                        centerSpaceRadius: 20,
                                         sectionsSpace: 4,
                                       ),
                                     ),
@@ -138,8 +149,12 @@ class NotificationsPage extends StatelessWidget {
                                   bottom: BorderSide(color: AppColors.accentColor),
                                 ),
                                 color: item.isRead
-                                    ? Colors.white
-                                    : AppColors.primaryColor.withOpacity(0.1),
+                                    ? AppColors.getNotificationColorByType(item.type).withValues(
+                                        alpha: 0.6,
+                                    )
+                                    : AppColors.primaryColor.withValues(
+                                        alpha: 0.7,
+                                    ),
                               ),
                               margin: const EdgeInsets.symmetric(vertical: 4),
                               child: Column(
@@ -190,13 +205,13 @@ class StatsNotificationCount extends StatelessWidget {
         child: IntrinsicHeight(
           child: Row(
             children: [
-              CounterSimplecolumn(title: 'Total of Today', count: notifications.unreadNotifications.length),
+              CounterSimplecolumn(title: 'Total Today', count: notifications.unreadNotifications.length),
               VerticalDivider(
                 color: AppColors.accentColor,
                 thickness: 1,
                 width: 20,
               ),
-              CounterSimplecolumn(title: 'Total Last 7 Days', count: notifications.unreadNotifications.length),
+              CounterSimplecolumn(title: 'Total 7 Days', count: notifications.unreadNotifications.length),
             ],
           ),
         ),

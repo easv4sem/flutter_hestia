@@ -19,7 +19,7 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final notifications = context.watch<AppNotification>();
     final Random random = Random();
-    final int randomIndex = random.nextInt(3);
+    final int randomIndex = random.nextInt(4);
 
 
     return AppBar(
@@ -65,6 +65,14 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     title: "Example Notification.",
                     subtitle: "This is an example notification message.",
                     type: EnumAppNotificationType.success,
+                  )
+                );
+                case 3:
+                notifications.addNotification(
+                  AppNotificationItem(
+                    title: "Example Notification.",
+                    subtitle: "This is an example notification message.",
+                    type: EnumAppNotificationType.fire,
                   )
                 );
                 break;

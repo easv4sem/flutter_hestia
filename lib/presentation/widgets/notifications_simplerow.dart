@@ -28,7 +28,7 @@ class NotificationsSimplerow extends StatelessWidget {
               time,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: AppColors.primaryColor,
+                color: AppColors.textColorDark,
               ),
             )
           ),
@@ -37,7 +37,7 @@ class NotificationsSimplerow extends StatelessWidget {
               type.name.toUpperCase(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: AppColors.primaryColor,
+                color: AppColors.textColorDark,
               ),
             )
           ),
@@ -46,7 +46,7 @@ class NotificationsSimplerow extends StatelessWidget {
               title,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: AppColors.primaryColor,
+                color: AppColors.textColorDark,
               ),
             )
           ),
@@ -55,7 +55,7 @@ class NotificationsSimplerow extends StatelessWidget {
               source,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: AppColors.primaryColor,
+                color: AppColors.textColorDark,
               ),
             )
           ),

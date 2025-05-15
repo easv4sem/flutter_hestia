@@ -7,8 +7,6 @@ import 'package:hestia/models/app_notification_item.dart';
 /// It uses the ChangeNotifier mixin to notify listeners of changes.
 class AppNotification extends ChangeNotifier {
 
-  
-  
   /// Singleton instance of AppNotification
   AppNotification._internal();
   static final AppNotification _instance = AppNotification._internal();
