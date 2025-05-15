@@ -1,3 +1,5 @@
+import 'device_state.dart';
+
 class Device {
   final String displayName;
   final String? ip;
@@ -7,7 +9,7 @@ class Device {
   final String? version;
   final DateTime? lastHeartbeat;
   final num? port;
-  final String? mode; // maybe 'Connected', 'OK', etc.
+  final DeviceState? mode; // maybe 'Connected', 'OK', etc.
 
   Device({
     required this.displayName,
@@ -18,7 +20,7 @@ class Device {
     this.version,
     this.lastHeartbeat,
     this.port,
-    this.mode,
+    this.mode = DeviceState.offline,
   });
 
   factory Device.fromJson(Map<String, dynamic> json) {
@@ -34,7 +36,7 @@ class Device {
           json['LastHeartbeat'] != null
               ? DateTime.parse(json['LastHeartbeat'])
               : null,
-      mode: json['mode'] as String?, // map this field from API if exists
+      mode: json['mode'] as DeviceState? ?? DeviceState.offline,
     );
   }
 
@@ -45,7 +47,7 @@ class Device {
       'longitude': longitude,
       'latitude': latitude,
       'lasthardbeat': lastHeartbeat,
-      'mode': mode ?? 'Unknown',
+      'mode': mode ?? DeviceState.offline,
     };
   }
 }
