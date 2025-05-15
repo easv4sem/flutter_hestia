@@ -38,7 +38,7 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         /// It also increases the notification count.
         /// TODO: remove this example later
         IconButton(
-          icon: const Icon(Icons.warning_outlined, color: Colors.black),
+          icon: const Icon(Icons.warning_outlined, color: Colors.redAccent),
           onPressed: () {
             switch (randomIndex) {
               case 0:

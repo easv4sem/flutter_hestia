@@ -185,7 +185,7 @@ class NotificationsPage extends StatelessWidget {
 }
 
 
-class StatsNotificationCount extends StatelessWidget {
+class StatsNotificationCount extends StatefulWidget {
   const StatsNotificationCount({
     super.key,
     required this.notifications,
@@ -193,6 +193,11 @@ class StatsNotificationCount extends StatelessWidget {
 
   final AppNotification notifications;
 
+  @override
+  State<StatsNotificationCount> createState() => _StatsNotificationCountState();
+}
+
+class _StatsNotificationCountState extends State<StatsNotificationCount> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -205,13 +210,13 @@ class StatsNotificationCount extends StatelessWidget {
         child: IntrinsicHeight(
           child: Row(
             children: [
-              CounterSimplecolumn(title: 'Total Today', count: notifications.unreadNotifications.length),
+              CounterSimplecolumn(title: 'Total Today', count: widget.notifications.unreadNotifications.length),
               VerticalDivider(
                 color: AppColors.accentColor,
                 thickness: 1,
                 width: 20,
               ),
-              CounterSimplecolumn(title: 'Total 7 Days', count: notifications.unreadNotifications.length),
+              CounterSimplecolumn(title: 'Total 7 Days', count: widget.notifications.unreadNotifications.length),
             ],
           ),
         ),
