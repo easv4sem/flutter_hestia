@@ -6,6 +6,7 @@ import 'package:hestia/presentation/pages/devices_page.dart';
 import 'package:hestia/presentation/pages/home_page.dart';
 import 'package:hestia/presentation/pages/landing_page.dart';
 import 'package:hestia/presentation/pages/not_found_page.dart';
+import 'package:hestia/presentation/pages/notifications_page.dart';
 import 'package:hestia/presentation/pages/privacy_policy_page.dart';
 import 'package:hestia/presentation/pages/registre_page.dart';
 import 'package:hestia/presentation/pages/settings_page.dart';
@@ -77,6 +78,11 @@ class AppRouter {
       GoRoute(
         path: Routes.devices.path,
         builder: (context, _) => const DevicesPage(),
+      ),
+      GoRoute(
+        path: Routes.notifications.path, 
+        name: Routes.notifications.name, 
+        builder: (context, state) => const NotificationsPage()
       ),
     ],
   );

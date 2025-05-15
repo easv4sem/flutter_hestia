@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hestia/auth/auth_provider.dart';
 import 'package:hestia/core/router.dart';
 import 'package:hestia/core/app_constants.dart';
+import 'package:hestia/models/app_notification_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:hestia/models/device_provider.dart';
 import 'dart:async';
 
@@ -22,11 +24,13 @@ void main() async {
         ChangeNotifierProvider<DeviceProvider>.value(
           value: DeviceProvider.instance,
         ),
+        ChangeNotifierProvider<AppNotificationProvider>.value(
+          value: AppNotificationProvider.instance,
+        ),
       ],
       child: MyApp(),
     ),
   );
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

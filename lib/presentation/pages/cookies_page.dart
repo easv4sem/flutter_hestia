@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hestia/presentation/widgets/main_layout_widget.dart';
+import 'package:hestia/theme/colors.dart';
 
 class CookiesPage extends StatelessWidget {
   const CookiesPage({super.key});
@@ -124,7 +125,7 @@ class CookiesTable extends StatelessWidget {
       children: [
         // Header row
         const TableRow(
-          decoration: BoxDecoration(color: Colors.grey),
+          decoration: BoxDecoration(color: AppColors.primaryColor),
           children: [
             Padding(
               padding: EdgeInsets.all(8.0),
