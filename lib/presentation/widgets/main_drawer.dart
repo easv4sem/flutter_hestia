@@ -20,6 +20,13 @@ class MainDrawer extends StatelessWidget {
           },
         ),
         ListTile(
+          leading: const Icon(Icons.notifications),
+          title: const Text('Notifications Overview'),
+          onTap: () {
+            context.go(Routes.notifications.path);
+          },
+        ),
+        ListTile(
           leading: const Icon(Icons.settings),
           title: const Text('Settings'),
           onTap: () {

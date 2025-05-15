@@ -56,6 +56,9 @@ class _NotificationsDrawerState extends State<NotificationsDrawer> {
     );
   }
 
+/// Function to get the icon based on notification type
+/// This function maps the EnumAppNotificationType to the corresponding icon.
+/// It defaults to a HELP icon if the type is not recognized.
   IconData getNotificationIcon(EnumAppNotificationType type) {
     switch (type) {
       case EnumAppNotificationType.error:
@@ -70,8 +73,10 @@ class _NotificationsDrawerState extends State<NotificationsDrawer> {
         return AppIcons.fire;
       case EnumAppNotificationType.offline:
         return AppIcons.offline;
-      default:
+      case EnumAppNotificationType.notification:
         return AppIcons.notificationBell;
+      default:
+        return AppIcons.help;
     }
   }
 }

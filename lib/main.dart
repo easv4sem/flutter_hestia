@@ -6,13 +6,14 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-      // The main function is the entry point of the application.
-      // It initializes the app and sets up the provider for state management.
-      // The ChangeNotifierProvider is used to provide the AppNotification class
-      ChangeNotifierProvider(
-        create: (_) => AppNotification(),
-        child: const MyApp(),
-      )    
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AppNotification>.value(
+          value: AppNotification.instance,
+        ),
+      ],
+      child: const MyApp(),
+    ),
     );
 }
 

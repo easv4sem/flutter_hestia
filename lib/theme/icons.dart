@@ -15,5 +15,6 @@ class AppIcons {
   static const cookies = Icons.cookie_outlined;
   static const privacy = Icons.privacy_tip_outlined;
   static const notificationBell = Icons.notifications_outlined;
+  static const help = Icons.help_outline;
 
 }

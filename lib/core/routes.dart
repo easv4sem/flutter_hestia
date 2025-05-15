@@ -7,6 +7,7 @@ enum Routes {
   cookies,
   privacy,
   landingPage,
+  notifications,
 }
 
 extension AppRoutesExtension on Routes {
@@ -16,6 +17,8 @@ extension AppRoutesExtension on Routes {
         return '/home';
       case Routes.login:
         return '/login';
+      case Routes.notifications:
+        return '/notifications';
       case Routes.settings:
         return '/settings';
       case Routes.dashboard:
