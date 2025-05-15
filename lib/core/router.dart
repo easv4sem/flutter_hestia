@@ -3,6 +3,7 @@ import 'package:hestia/presentation/pages/cookies_page.dart';
 import 'package:hestia/presentation/pages/home_page.dart';
 import 'package:hestia/presentation/pages/landing_page.dart';
 import 'package:hestia/presentation/pages/not_found_page.dart';
+import 'package:hestia/presentation/pages/notifications_page.dart';
 import 'package:hestia/presentation/pages/privacy_policy_page.dart';
 import 'package:hestia/presentation/pages/registre_page.dart';
 import 'package:hestia/presentation/pages/settings_page.dart';
@@ -58,6 +59,11 @@ class AppRouter {
         path: Routes.registre.path,
         name: Routes.registre.name,
         builder: (context, state) => const RegistrePage(),
+      ),
+      GoRoute(
+        path: Routes.notifications.path, 
+        name: Routes.notifications.name, 
+        builder: (context, state) => const NotificationsPage()
       ),
     ],
   );

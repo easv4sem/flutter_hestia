@@ -12,7 +12,9 @@ class MainLayoutWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.accentColor.withValues(
+        alpha: 0.5
+      ),
       appBar: MainAppBarWidget(),
       drawer: MainDrawer(),
       endDrawer: NotificationsDrawer(),
