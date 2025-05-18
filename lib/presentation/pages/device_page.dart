@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 class DevicePage extends StatelessWidget {
   final dynamic deviceId;
+  
 
   const DevicePage({super.key, required this.deviceId});
 
@@ -60,8 +61,25 @@ class DevicePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16.0),
-              TempLinechartWidget(device: device),
-            ],
+              TempLinechartWidget(
+                device: device,
+                title: "Temperature",
+                subtitle: "Data from last 24 hours",
+                xAxisTitle: "Time (hours)",
+                yAxisTitle: "Temperature (°C)",
+                lineColor: Colors.red,
+                dataSuffix: " °C",
+              ),
+              const SizedBox(height: 16.0),
+              TempLinechartWidget(
+                device: device,
+                title: "Humidity",
+                subtitle: "Data from last 24 hours",
+                xAxisTitle: "Time (hours)",
+                yAxisTitle: "Humidity (%)",
+                lineColor: Colors.blue,
+                dataSuffix: " %",
+              ),            ],
           ),
         ),
       ),
