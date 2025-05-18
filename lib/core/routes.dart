@@ -2,7 +2,6 @@ enum Routes {
   home,
   login,
   settings,
-  dashboard,
   notFound,
   cookies,
   privacy,
@@ -10,6 +9,7 @@ enum Routes {
   notifications,
   registre,
   devices,
+  device,
 }
 
 extension AppRoutesExtension on Routes {
@@ -23,8 +23,6 @@ extension AppRoutesExtension on Routes {
         return '/notifications';
       case Routes.settings:
         return '/settings';
-      case Routes.dashboard:
-        return '/dashboard';
       case Routes.notFound:
         return '/not-found';
       case Routes.cookies:
@@ -37,6 +35,8 @@ extension AppRoutesExtension on Routes {
         return '/registre';
       case Routes.devices:
         return '/devices';
+      case Routes.device:
+        return '/device/:deviceId';
     }
   }
 }

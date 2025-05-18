@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:hestia/models/device_provider.dart';
 import 'dart:async';
 
-import 'package:provider/provider.dart';
 
 final StreamController<String> notificationController =
     StreamController<String>();

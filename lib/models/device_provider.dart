@@ -13,20 +13,18 @@ class DeviceProvider extends ChangeNotifier {
 
   List<Device> devices = [];
   List<Device> filteredDevices = [];
-  Device? selectedDevice;
   String selectedFilter = 'All';
   bool isAscending = true;
   bool isLoading = false;
 
-  void setSelectedDevice(Device device) {
-    selectedDevice = device;
-    notifyListeners();
+  Device? getDeviceByMac(String id) {
+    try {
+      return devices.firstWhere((device) => device.mac == id);
+    } catch (e) {
+      return null;
+    }
   }
 
-  void clearSelectedDevice() {
-    selectedDevice = null;
-    notifyListeners();
-  }
 
   void setDevices(List<Device> newDevices) {
     devices = newDevices;
@@ -85,6 +83,7 @@ class DeviceProvider extends ChangeNotifier {
         final List<dynamic> jsonList = response.data;
         final List<Device> loadedDevices =
             jsonList.map((deviceJson) => Device.fromJson(deviceJson)).toList();
+
 
         devices = loadedDevices;
         filteredDevices = List.from(devices);

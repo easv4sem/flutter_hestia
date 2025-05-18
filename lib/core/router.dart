@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hestia/auth/auth_provider.dart';
 import 'package:hestia/presentation/pages/cookies_page.dart';
+import 'package:hestia/presentation/pages/device_page.dart';
 import 'package:hestia/presentation/pages/devices_page.dart';
 import 'package:hestia/presentation/pages/home_page.dart';
 import 'package:hestia/presentation/pages/landing_page.dart';
@@ -17,7 +18,7 @@ import 'routes.dart';
 /// It defines the routes and their corresponding pages.
 /// pages are imported from the pages enum.
 class AppRouter {
-  static bool devMode = false;
+  static bool devMode = true;
 
   static final GoRouter router = GoRouter(
     initialLocation: Routes.home.path,
@@ -83,6 +84,15 @@ class AppRouter {
         path: Routes.notifications.path,
         name: Routes.notifications.name,
         builder: (context, state) => const NotificationsPage(),
+      ),
+      GoRoute(
+        path: Routes.device.path,
+        name: Routes.device.name,
+        builder: (context, state) {
+          return DevicePage(
+            deviceId: state.pathParameters['deviceId']!,
+          );
+        }, 
       ),
     ],
   );

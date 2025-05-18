@@ -1,3 +1,5 @@
+import 'package:hestia/models/sensor.dart';
+
 import 'device_state.dart';
 
 class Device {
@@ -10,6 +12,7 @@ class Device {
   final DateTime? lastHeartbeat;
   final num? port;
   final DeviceState mode;
+  final List<Sensor>? sensors;
 
   Device({
     required this.displayName,
@@ -20,6 +23,7 @@ class Device {
     this.version,
     this.lastHeartbeat,
     this.port,
+    this.sensors,
     this.mode = DeviceState.offline,
   });
 
@@ -37,6 +41,9 @@ class Device {
               ? DateTime.tryParse(json['LastHeartbeat'])
               : null,
       mode: _parseDeviceState(json['Mode']),
+      sensors: (json['Sensors'] as List<dynamic>?)
+          ?.map((sensor) => Sensor.fromJson(sensor))
+          .toList(),
     );
   }
 

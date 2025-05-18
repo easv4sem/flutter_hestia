@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hestia/core/routes.dart';
 import 'package:hestia/models/device.dart';
 import 'package:hestia/models/device_state.dart';
 import 'package:hestia/theme/colors.dart';
@@ -10,6 +12,7 @@ class DeviceCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: ListTile(
@@ -49,7 +52,9 @@ class DeviceCardWidget extends StatelessWidget {
         ),
         trailing: Icon(Icons.arrow_forward, color: device.mode.color),
         onTap: () {
-          // TODO: Handle device tap
+          context.goNamed(Routes.device.name, pathParameters: {
+            'deviceId': device.mac.toString()},
+          );
         },
       ),
     );

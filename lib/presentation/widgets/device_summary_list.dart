@@ -62,6 +62,8 @@ class DeviceSummaryList extends StatelessWidget {
               color: DeviceState.error.color,
             ),
           ),
+          const SizedBox(width: 16.0),
+          
         ],
       ),
     );
