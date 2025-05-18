@@ -63,6 +63,14 @@ class DeviceSummaryList extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 16.0),
+          Expanded(
+            child: DeviceSummaryCard(
+              title: 'Setup Devices',
+              count: provider.getNumberOfDevicesByStatus(DeviceState.setup),
+              icon: Icons.settings,
+              color: DeviceState.setup.color,
+            ),
+          ),
           
         ],
       ),

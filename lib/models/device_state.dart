@@ -25,7 +25,7 @@ extension DeviceStateExtension on DeviceState {
       case DeviceState.offline:
         return const Color(0xFF9E9E9E); // Grey
       case DeviceState.setup:
-        return const Color(0xFF2196F3); // Blue
+        return const Color.fromARGB(155, 115, 85, 175); // Blue
       case DeviceState.error:
         return const Color(0xFFF44336); // Red
       case DeviceState.alert:

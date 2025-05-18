@@ -16,9 +16,7 @@ class Sensor {
     });
 
     factory Sensor.fromJson(Map<String, dynamic> json) {
-        
-        print(  'Sensor.fromJson: $json');
-        
+                
         return Sensor(
             uniqueIdentifier: json['UniqueIdentifier'] as String,
             displayName: json['DisplayName'] as String,

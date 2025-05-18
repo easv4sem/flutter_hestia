@@ -1,10 +1,9 @@
 enum EnumSensorType {
-  // Sensor types
-  camera,
-  temperature,
-  humidity,
-  pressure,
-  unknown;
+      camera,
+    bme280, // Barometer
+    mq135mq2, // Air Quality sensor
+    soilMoisture, // Soil Moisture sensor
+    unknown; 
 
   static EnumSensorType fromString(String type) {
     return EnumSensorType.values.firstWhere(

@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hestia/models/device_provider.dart';
+import 'package:hestia/models/enum_sensor_type.dart';
 import 'package:hestia/presentation/widgets/info_row_widget.dart';
 import 'package:hestia/presentation/widgets/main_layout_widget.dart';
 import 'package:hestia/presentation/widgets/temp_linechart_widget.dart';
@@ -60,26 +61,86 @@ class DevicePage extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 16.0),
-              TempLinechartWidget(
-                device: device,
-                title: "Temperature",
-                subtitle: "Data from last 24 hours",
-                xAxisTitle: "Time (hours)",
-                yAxisTitle: "Temperature (°C)",
-                lineColor: Colors.red,
-                dataSuffix: " °C",
-              ),
-              const SizedBox(height: 16.0),
-              TempLinechartWidget(
-                device: device,
-                title: "Humidity",
-                subtitle: "Data from last 24 hours",
-                xAxisTitle: "Time (hours)",
-                yAxisTitle: "Humidity (%)",
-                lineColor: Colors.blue,
-                dataSuffix: " %",
-              ),            ],
+
+
+
+              if (device.sensors!.any((sensor) => sensor.type == EnumSensorType.bme280)) 
+              ...[
+                SizedBox(height: 16.0),
+                TempLinechartWidget(
+                  device: device,
+                  title: "Temperature",
+                  subtitle: "Data from last 24 hours",
+                  xAxisTitle: "Time (hours)",
+                  yAxisTitle: "Temperature (°C)",
+                  lineColor: Colors.red,
+                  dataSuffix: " °C",
+                ),
+                SizedBox(height: 16.0),
+                TempLinechartWidget(
+                  device: device,
+                  title: "Humidity",
+                  subtitle: "Data from last 24 hours",
+                  xAxisTitle: "Time (hours)",
+                  yAxisTitle: "Humidity (%)",
+                  lineColor: Colors.blue,
+                  dataSuffix: " %",
+                ),
+                SizedBox(height: 16.0),
+                TempLinechartWidget(
+                  device: device,
+                  title: "Pressure",
+                  subtitle: "Data from last 24 hours",
+                  xAxisTitle: "Time (hours)",
+                  yAxisTitle: "Pressure (hPa)",
+                  lineColor: Colors.orange,
+                  dataSuffix: " hPa",
+                ),
+              ], 
+
+              if (device.sensors!.any((sensor) => sensor.type == EnumSensorType.mq135mq2))
+              ...[
+                SizedBox(height: 16.0),
+                TempLinechartWidget(
+                  device: device,
+                  title: "Air Quality",
+                  subtitle: "Data from last 24 hours",
+                  xAxisTitle: "Time (hours)",
+                  yAxisTitle: "Air Quality Index",
+                  lineColor: Colors.green,
+                  dataSuffix: " AQI",
+                ),
+              ],
+
+              if (device.sensors!.any((sensor) => sensor.type == EnumSensorType.soilMoisture))
+              ...[
+                SizedBox(height: 16.0),
+                TempLinechartWidget(
+                  device: device,
+                  title: "Soil Moisture",
+                  subtitle: "Data from last 24 hours",
+                  xAxisTitle: "Time (hours)",
+                  yAxisTitle: "Soil Moisture (%)",
+                  lineColor: Colors.brown,
+                  dataSuffix: " %",
+                ),
+              ],
+
+              if (device.sensors!.any((sensor) => sensor.type == EnumSensorType.camera))
+              ...[
+                SizedBox(height: 16.0),
+                TempLinechartWidget(
+                  device: device,
+                  title: "Camera Feed",
+                  subtitle: "Data from last 24 hours",
+                  xAxisTitle: "Time (hours)",
+                  yAxisTitle: "Camera Feed",
+                  lineColor: Colors.purple,
+                  dataSuffix: " Feed",
+                ),
+              ],
+                
+             ],
           ),
         ),
       ),
