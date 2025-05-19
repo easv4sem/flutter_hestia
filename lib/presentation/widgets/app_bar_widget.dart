@@ -19,6 +19,7 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     final notifications = context.watch<AppNotificationProvider>();
     final Random random = Random();
     final int randomIndex = random.nextInt(4);
+    final List<int> charCodes = [65, 66, 67, 68]; // Example character codes for 'A', 'B', 'C', 'D'
 
     return AppBar(
       title: GestureDetector(
@@ -41,6 +42,7 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               case 0:
                 notifications.addNotification(
                   AppNotificationItem(
+                    uniqueId: String.fromCharCode(charCodes.first + randomIndex),
                     title: "Example Notification.",
                     subtitle: "This is an example notification message.",
                     type: EnumAppNotificationType.warning,
@@ -50,6 +52,7 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               case 1:
                 notifications.addNotification(
                   AppNotificationItem(
+                    uniqueId: String.fromCharCode(charCodes.first + randomIndex),
                     title: "Example Notification.",
                     subtitle: "This is an example notification message.",
                     type: EnumAppNotificationType.info,
@@ -59,6 +62,7 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               case 2:
                 notifications.addNotification(
                   AppNotificationItem(
+                    uniqueId: String.fromCharCode(charCodes.first + randomIndex),
                     title: "Example Notification.",
                     subtitle: "This is an example notification message.",
                     type: EnumAppNotificationType.success,
@@ -67,6 +71,7 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               case 3:
                 notifications.addNotification(
                   AppNotificationItem(
+                    uniqueId: String.fromCharCode(charCodes.first + randomIndex),
                     title: "Example Notification.",
                     subtitle: "This is an example notification message.",
                     type: EnumAppNotificationType.fire,

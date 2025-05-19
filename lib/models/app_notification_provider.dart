@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:hestia/models/app_notification_item.dart';
+import 'package:hestia/models/enum_app_notification_type.dart';
+import 'package:hestia/service/api_service.dart';
 
 /// This class manages the state of app notifications.
 /// It allows adding, removing, and clearing notifications.
@@ -14,6 +16,9 @@ class AppNotificationProvider extends ChangeNotifier {
 
   final List<AppNotificationItem> _notifications = [];
   final List<AppNotificationItem> _unreadNotifications = [];
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
  
   /// Getter to retrieve the list of notifications
   List<AppNotificationItem> get notifications => _notifications;
@@ -40,7 +45,12 @@ class AppNotificationProvider extends ChangeNotifier {
     AppNotificationItem item = appNotification;
 
     _notifications.remove(appNotification);
+
+    print(item.toJson());
+
     _notifications.add(item);
+
+    setAsRead(item);
     
     _unreadNotifications.remove(appNotification);
     notifyListeners();
@@ -72,4 +82,99 @@ class AppNotificationProvider extends ChangeNotifier {
       n.date.isAtSameMomentAs(DateTime(sevenDaysAgo.year, sevenDaysAgo.month, sevenDaysAgo.day))
     ).length;
   }
+
+  Future<void> markAllAsRead() async {
+    for (var notification in _unreadNotifications.toList()) {
+      markAsRead(notification);
+    }
+    _unreadNotifications.clear();
+    notifyListeners();
+  }
+
+  Future<void> setAsRead(AppNotificationItem notification) async {
+    try {
+
+      final response = await ApiService().put('/notifications', 
+        
+          notification.toJson()
+        
+      );
+
+      print(response.data);
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+          notification.isRead = true;
+          _unreadNotifications.remove(notification);
+          notifyListeners();
+      } else {
+        throw Exception('Failed to mark notification as read.: ${response.statusCode}');
+      }
+    } catch (e) {
+      print("Error in setAsRead: $e");
+    }
+  }
+
+  /// Loads notifications from the API
+  /// This method fetches notifications from the server and updates the local list.
+  /// It handles errors and updates the loading state.
+  Future<void> loadNotifications() async {
+    setIsLoading(true);
+
+    try {
+      final response = await ApiService().get('/notifications');
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = response.data;        
+        _notifications.clear();
+        _unreadNotifications.clear();
+
+        for (var item in data) {
+          final notification = AppNotificationItem(
+            uniqueId: item['UniqueIdentifier'],
+            title: item['Title'],
+            subtitle: item['SubTitle'],
+            type: _parseNotificationType(item['Type']),
+            isRead: item['IsRead'] ?? false,
+            date: DateTime.parse(item['DateCreated'])
+          );
+          print(notification.toJson());
+          addNotification(notification);
+        }
+      } else {
+        throw Exception('Failed to load notifications.: ${response.statusCode}');
+      }
+    } catch (e) {
+      print("Error loading notifications: $e");
+      clearNotifications();
+    }
+    setIsLoading(false);
+  }
+
+  /// Refreshes the notifications by reloading them from the API
+  Future<void> refreshNotifications() async {
+    await loadNotifications();
+  }
+
+  void setIsLoading(bool loading) {
+    _isLoading = loading;
+    notifyListeners();
+  }
+
+  EnumAppNotificationType _parseNotificationType(dynamic value) {
+  try {
+    int? index;
+    if (value is int) {
+      index = value;
+    } else if (value is String) {
+      index = int.tryParse(value);
+    }
+
+    if (index != null && index >= 0 && index < EnumAppNotificationType.values.length) {
+      return EnumAppNotificationType.values[index];
+    }
+  } catch (_) {}
+
+  return EnumAppNotificationType.info; // default fallback
+}
 }

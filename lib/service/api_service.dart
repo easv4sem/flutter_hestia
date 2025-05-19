@@ -27,6 +27,10 @@ class ApiService {
 
   Future<Response> put(String endpoint, Map<String, dynamic> data) async {
     try {
+
+      print("PUT request to $endpoint with data: $data");
+
+
       final response = await _dio.put(endpoint, data: data);
       return response;
     } on DioException catch (e) {
