@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hestia/core/routes.dart';
 import 'package:hestia/models/enum_sensor_type.dart';
 import 'package:hestia/device/presentation/widgets/info_row_widget.dart';
 import 'package:hestia/presentation/widgets/main_layout_widget.dart';
@@ -25,12 +27,17 @@ class DevicePageContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Device ID: ${device.mac}',
-              style: const TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                IconButton(onPressed: () => context.go(Routes.devices.path) , icon: const Icon(Icons.arrow_back)),
+                Text(
+                  'Device ID: ${device.mac}',
+                  style: const TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
             Row(

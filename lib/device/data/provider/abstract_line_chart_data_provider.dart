@@ -30,7 +30,7 @@ abstract class AbstractLineChartDataProvider with ChangeNotifier {
   }
 
   double getAverageValue() {
-    if (sortedData.isNotEmpty || sortedData == null) {
+    if (sortedData.isNotEmpty) {
       return sortedData.map((spot) => spot.y).reduce((a, b) => a + b) /
           sortedData.length;
     } else {
@@ -39,7 +39,7 @@ abstract class AbstractLineChartDataProvider with ChangeNotifier {
   }
 
   double getMaxValue() {
-    if (sortedData.isNotEmpty || sortedData == null) {
+    if (sortedData.isNotEmpty) {
       return sortedData.map((spot) => spot.y).reduce((a, b) => a > b ? a : b);
     } else {
       return 0;
@@ -47,7 +47,7 @@ abstract class AbstractLineChartDataProvider with ChangeNotifier {
   }
 
   double getMinValue() {
-    if (sortedData.isNotEmpty || sortedData == null) {
+    if (sortedData.isNotEmpty) {
       return sortedData.map((spot) => spot.y).reduce((a, b) => a < b ? a : b);
     } else {
       return 0;
@@ -55,7 +55,7 @@ abstract class AbstractLineChartDataProvider with ChangeNotifier {
   }
 
   double getCurrentValue() {
-    if (sortedData.isNotEmpty || sortedData == null) {
+    if (sortedData.isNotEmpty) {
       return sortedData.last.y;
     } else {
       return 0;

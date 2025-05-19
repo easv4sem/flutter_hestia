@@ -10,7 +10,7 @@ class PresureLineChartProvider extends AbstractLineChartDataProvider {
   Future<void> loadDataFromSrc() async {
     // Simulate network delay
     await Future.delayed(const Duration(seconds: 1));
-    sortedData = [
+    unsortedData = [
       FlSpot(0, 5),
       FlSpot(1, 10),
       FlSpot(2, 15),
