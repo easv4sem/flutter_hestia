@@ -11,7 +11,6 @@ import 'package:hestia/theme/colors.dart';
 import 'package:hestia/theme/notification_banner_styles.dart';
 import 'package:provider/provider.dart';
 
-
 class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBarWidget({super.key});
 
@@ -20,7 +19,6 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     final notifications = context.watch<AppNotificationProvider>();
     final Random random = Random();
     final int randomIndex = random.nextInt(4);
-
 
     return AppBar(
       title: GestureDetector(
@@ -31,7 +29,6 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       elevation: 4.0,
       shadowColor: AppColors.secondaryColor,
       actions: [
-        
         /// Example of a notification banner
         /// This is a simple example of how to show a notification banner
         /// using the ShowNotificationBanner class.
@@ -47,7 +44,7 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     title: "Example Notification.",
                     subtitle: "This is an example notification message.",
                     type: EnumAppNotificationType.warning,
-                  )
+                  ),
                 );
                 break;
               case 1:
@@ -56,7 +53,7 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     title: "Example Notification.",
                     subtitle: "This is an example notification message.",
                     type: EnumAppNotificationType.info,
-                  )
+                  ),
                 );
                 break;
               case 2:
@@ -65,19 +62,19 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     title: "Example Notification.",
                     subtitle: "This is an example notification message.",
                     type: EnumAppNotificationType.success,
-                  )
+                  ),
                 );
-                case 3:
+              case 3:
                 notifications.addNotification(
                   AppNotificationItem(
                     title: "Example Notification.",
                     subtitle: "This is an example notification message.",
                     type: EnumAppNotificationType.fire,
-                  )
+                  ),
                 );
                 break;
             }
-            
+
             ShowNotificationBanner.showNotificationTop(
               context,
               type: NotificationBannerType.error,
@@ -89,7 +86,10 @@ class MainAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         Stack(
           children: [
             IconButton(
-              icon: const Icon(Icons.notifications_outlined, color: Colors.black),
+              icon: const Icon(
+                Icons.notifications_outlined,
+                color: Colors.black,
+              ),
               onPressed: () {
                 Scaffold.of(context).openEndDrawer();
               },

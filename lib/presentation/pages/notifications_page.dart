@@ -1,8 +1,8 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hestia/models/app_notification_provider.dart';
 import 'package:hestia/models/enum_app_notification_type.dart';
 import 'package:hestia/presentation/widgets/main_layout_widget.dart';
+import 'package:hestia/presentation/widgets/notifications__pie_chart.dart';
 import 'package:hestia/presentation/widgets/notifications_simplerow.dart';
 import 'package:hestia/theme/colors.dart';
 import 'package:provider/provider.dart';
@@ -19,29 +19,8 @@ class NotificationsPage extends StatelessWidget {
       typeCounts[notif.type] = (typeCounts[notif.type] ?? 0) + 1;
     }
 
-    final total = notifications.notifications.length;
-
     final sortedNotifications = List.from(notifications.notifications)
-    ..sort((a, b) => b.date.compareTo(a.date)); // newest first
-
-    final List<PieChartSectionData> pieSections = total > 0
-        ? typeCounts.entries.map((entry) {
-            final percentage = ((entry.value / total) * 100).toStringAsFixed(0);
-            return PieChartSectionData(
-              color: AppColors.getNotificationColorByType(entry.key).withValues(
-                alpha: 0.7,
-              ),
-              title: '${entry.key.name}\n$percentage%',
-              value: entry.value.toDouble(),
-              radius: 80,
-              titleStyle: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textColorDark,                
-              ),
-            );
-          }).toList()
-        : [];
+      ..sort((a, b) => b.date.compareTo(a.date)); // newest first
 
     return MainLayoutWidget(
       body: Center(
@@ -74,42 +53,8 @@ class NotificationsPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 20),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.backgroundColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: IntrinsicHeight(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Notifications by Type'.toUpperCase(),
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.accentColor,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 200,
-                              width: 200,
-                              child: pieSections.isEmpty
-                                  ? const Center(child: Text('No data'))
-                                  : PieChart(
-                                      PieChartData(
-                                        sections: pieSections,
-                                        centerSpaceRadius: 20,
-                                        sectionsSpace: 4,
-                                      ),
-                                    ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  NotificationsPieChart(
+                    notifications: notifications.notifications,
                   ),
                 ],
               ),
@@ -135,11 +80,52 @@ class NotificationsPage extends StatelessWidget {
                 Expanded(
                   child: Column(
                     children: [
-                      const NotificationsSimplerow(
-                        time: 'Time',
-                        type: EnumAppNotificationType.type,
-                        title: 'Title',
-                        source: 'Source',
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'Time',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.textColorDark,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                "Type",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.textColorDark,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                "Title",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.textColorDark,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                "Source",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.textColorDark,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       Expanded(
                         child: ListView.builder(
@@ -149,15 +135,18 @@ class NotificationsPage extends StatelessWidget {
                               decoration: BoxDecoration(
                                 border: Border(
                                   top: BorderSide(color: AppColors.accentColor),
-                                  bottom: BorderSide(color: AppColors.accentColor),
+                                  bottom: BorderSide(
+                                    color: AppColors.accentColor,
+                                  ),
                                 ),
-                                color: item.isRead
-                                    ? AppColors.getNotificationColorByType(item.type).withValues(
-                                        alpha: 0.6,
-                                      )
-                                    : AppColors.primaryColor.withValues(
-                                        alpha: 0.7,
-                                      ),
+                                color:
+                                    item.isRead
+                                        ? AppColors.getNotificationColorByType(
+                                          item.type,
+                                        ).withValues(alpha: 0.6)
+                                        : AppColors.primaryColor.withValues(
+                                          alpha: 0.7,
+                                        ),
                               ),
                               margin: const EdgeInsets.symmetric(vertical: 4),
                               child: Column(
@@ -187,12 +176,8 @@ class NotificationsPage extends StatelessWidget {
   }
 }
 
-
 class StatsNotificationCount extends StatefulWidget {
-  const StatsNotificationCount({
-    super.key,
-    required this.notifications,
-  });
+  const StatsNotificationCount({super.key, required this.notifications});
 
   final AppNotificationProvider notifications;
 
@@ -213,13 +198,19 @@ class _StatsNotificationCountState extends State<StatsNotificationCount> {
         child: IntrinsicHeight(
           child: Row(
             children: [
-              CounterSimplecolumn(title: 'Total Today', count: widget.notifications.todayCount),
+              CounterSimplecolumn(
+                title: 'Total Today',
+                count: widget.notifications.todayCount,
+              ),
               VerticalDivider(
                 color: AppColors.accentColor,
                 thickness: 1,
                 width: 20,
               ),
-              CounterSimplecolumn(title: 'Total 7 Days', count: widget.notifications.last7DaysCount),
+              CounterSimplecolumn(
+                title: 'Total 7 Days',
+                count: widget.notifications.last7DaysCount,
+              ),
             ],
           ),
         ),

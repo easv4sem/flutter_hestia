@@ -4,4 +4,5 @@ class AppConstants {
   static const String appDescription =
       'Hestia is a sample Flutter application.';
   static const String apiBaseUrl = 'http://localhost:3000/api';
+  static const bool devMode = true; 
 }

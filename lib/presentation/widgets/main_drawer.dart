@@ -47,6 +47,13 @@ class MainDrawer extends StatelessWidget {
             context.go(Routes.privacy.path);
           },
         ),
+        ListTile(
+          leading: const Icon(Icons.devices),
+          title: const Text('Devices'),
+          onTap: () {
+            context.go(Routes.devices.path);
+          },
+        ),
       ],
     );
   }
