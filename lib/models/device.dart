@@ -41,11 +41,14 @@ class Device {
               ? DateTime.tryParse(json['LastHeartbeat'])
               : null,
       mode: _parseDeviceState(json['Mode']),
-      sensors: (json['Sensors'] as List<dynamic>?)
-          ?.map((sensor) => Sensor.fromJson(sensor))
-          .toList(),
+      sensors:
+          (json['Sensors'] as List<dynamic>?)
+              ?.map((sensor) => Sensor.fromJson(sensor))
+              .toList(),
     );
   }
+
+  get dataProvider => null;
 
   static DeviceState _parseDeviceState(dynamic value) {
     if (value is int && value >= 0 && value < DeviceState.values.length) {
