@@ -50,6 +50,20 @@ class NotificationsPage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         StatsNotificationCount(notifications: notifications),
+                        SizedBox(height: 20),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.backgroundColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CounterSimplecolumn(
+                              title: 'Total Notifications',
+                              count: notifications.notifications.length,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),

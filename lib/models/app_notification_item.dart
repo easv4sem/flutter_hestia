@@ -35,7 +35,7 @@ class AppNotificationItem extends ChangeNotifier {
       'UniqueIdentifier': uniqueId,
       'Title': title,
       'Subtitle': subtitle,
-      'Type': type.name,
+      'Type': type.index,
       'IsRead': isRead,
       'DateCreated': date.toIso8601String()
       }
