@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hestia/models/enum_sensor_type.dart';
-import 'package:hestia/presentation/widgets/info_row_widget.dart';
+import 'package:hestia/device/presentation/widgets/info_row_widget.dart';
 import 'package:hestia/presentation/widgets/main_layout_widget.dart';
-import 'package:hestia/presentation/widgets/linechart_widget.dart';
+import 'package:hestia/device/presentation/widgets/linechart_widget.dart';
 import 'package:hestia/theme/colors.dart';
 import 'package:provider/provider.dart';
 
-import 'package:hestia/providers/temp_line_chart_provider.dart';
-import 'package:hestia/providers/humidity_line_chart_provider.dart';
-import 'package:hestia/providers/air_quality_line_chart_provider.dart';
-import 'package:hestia/providers/soil_line_chart_provider.dart';
-import 'package:hestia/providers/presure_line_chart_provider.dart';
+import 'package:hestia/device/data/provider/temp_line_chart_provider.dart';
+import 'package:hestia/device/data/provider/humidity_line_chart_provider.dart';
+import 'package:hestia/device/data/provider/air_quality_line_chart_provider.dart';
+import 'package:hestia/device/data/provider/soil_line_chart_provider.dart';
+import 'package:hestia/device/data/provider/presure_line_chart_provider.dart';
 
 class DevicePageContent extends StatelessWidget {
   final dynamic device;

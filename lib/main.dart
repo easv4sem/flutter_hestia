@@ -4,7 +4,7 @@ import 'package:hestia/core/router.dart';
 import 'package:hestia/core/app_constants.dart';
 import 'package:hestia/models/app_notification_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:hestia/models/device_provider.dart';
+import 'package:hestia/device/data/provider/device_provider.dart';
 import 'dart:async';
 
 final StreamController<String> notificationController =

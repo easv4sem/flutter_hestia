@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hestia/core/routes.dart';
-import 'package:hestia/models/device.dart';
-import 'package:hestia/models/device_state.dart';
+import 'package:hestia/device/data/models/device.dart';
+import 'package:hestia/device/data/enums/device_state.dart';
 import 'package:hestia/theme/colors.dart';
 
 class DeviceCardWidget extends StatelessWidget {

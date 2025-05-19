@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hestia/models/device_provider.dart';
-import 'package:hestia/presentation/widgets/device_card_widget.dart';
-import 'package:hestia/presentation/widgets/device_summary_list.dart';
+import 'package:hestia/device/data/provider/device_provider.dart';
+import 'package:hestia/device/presentation/widgets/device_card_widget.dart';
+import 'package:hestia/device/presentation/widgets/device_summary_list.dart';
 import 'package:hestia/presentation/widgets/main_layout_widget.dart';
 import 'package:provider/provider.dart';
 

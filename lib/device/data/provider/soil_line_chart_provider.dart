@@ -1,5 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:hestia/providers/abstract_line_chart_data_provider.dart';
+import 'package:hestia/device/data/provider/abstract_line_chart_data_provider.dart';
 
 class SoilLineChartProvider extends AbstractLineChartDataProvider {
   SoilLineChartProvider({required this.device});
@@ -8,9 +8,9 @@ class SoilLineChartProvider extends AbstractLineChartDataProvider {
 
   @override
   Future<void> loadDataFromSrc() async {
-    // Simulate network delay
-    await Future.delayed(const Duration(seconds: 1));
-    sortedData = [
+    try {
+      await Future.delayed(const Duration(seconds: 1));
+    unsortedData = [
       FlSpot(0, 5),
       FlSpot(1, 10),
       FlSpot(2, 15),
@@ -31,5 +31,12 @@ class SoilLineChartProvider extends AbstractLineChartDataProvider {
     sortedData.sort((a, b) => a.x.compareTo(b.x));
 
     isLoading = false;
+      await Future.delayed(const Duration(seconds: 1));
+    } catch (e) {
+      // Handle any errors that may occur during data loading
+      print('Error loading data: $e');
+    }
+    // Simulate network delay
+    
   }
 }

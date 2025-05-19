@@ -1,6 +1,6 @@
 import 'package:hestia/models/sensor.dart';
 
-import 'device_state.dart';
+import '../enums/device_state.dart';
 
 class Device {
   final String displayName;

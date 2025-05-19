@@ -1,9 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:hestia/models/device.dart';
-import 'package:hestia/models/device_provider.dart';
-import 'package:hestia/presentation/widgets/info_row_widget.dart';
-import 'package:hestia/providers/abstract_line_chart_data_provider.dart';
+import 'package:hestia/device/data/models/device.dart';
+import 'package:hestia/device/data/provider/device_provider.dart';
+import 'package:hestia/device/presentation/widgets/info_row_widget.dart';
+import 'package:hestia/device/data/provider/abstract_line_chart_data_provider.dart';
 import 'package:hestia/theme/colors.dart';
 
 class LinechartWidget extends StatefulWidget {

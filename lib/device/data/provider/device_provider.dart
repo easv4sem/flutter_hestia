@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hestia/models/device.dart';
-import 'package:hestia/models/device_state.dart';
+import 'package:hestia/device/data/models/device.dart';
+import 'package:hestia/device/data/enums/device_state.dart';
 import 'package:hestia/service/api_service.dart';
 
 class DeviceProvider extends ChangeNotifier {

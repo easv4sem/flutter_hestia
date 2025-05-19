@@ -1,5 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:hestia/providers/abstract_line_chart_data_provider.dart';
+import 'package:hestia/device/data/provider/abstract_line_chart_data_provider.dart';
 
 class HumidityLineChartProvider extends AbstractLineChartDataProvider {
   HumidityLineChartProvider({required this.device});

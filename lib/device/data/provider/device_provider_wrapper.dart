@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hestia/providers/air_quality_line_chart_provider.dart';
-import 'package:hestia/providers/humidity_line_chart_provider.dart';
-import 'package:hestia/providers/presure_line_chart_provider.dart';
-import 'package:hestia/providers/soil_line_chart_provider.dart';
-import 'package:hestia/providers/temp_line_chart_provider.dart';
+import 'package:hestia/device/data/provider/air_quality_line_chart_provider.dart';
+import 'package:hestia/device/data/provider/humidity_line_chart_provider.dart';
+import 'package:hestia/device/data/provider/presure_line_chart_provider.dart';
+import 'package:hestia/device/data/provider/soil_line_chart_provider.dart';
+import 'package:hestia/device/data/provider/temp_line_chart_provider.dart';
 import 'package:provider/provider.dart';
 
 class DeviceProviderWrapper extends StatelessWidget {
