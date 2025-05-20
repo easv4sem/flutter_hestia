@@ -6,8 +6,8 @@ class Device {
   final String displayName;
   final String? ip;
   final String? mac;
-  final num? longitude;
-  final num? latitude;
+  final double? longitude;
+  final double? latitude;
   final String? version;
   final DateTime? lastHeartbeat;
   final num? port;
@@ -33,8 +33,8 @@ class Device {
       ip: json['Ip'] as String?,
       port: json['Port'] as num?,
       mac: json['Mac'] as String?,
-      longitude: json['Longitude'] as num?,
-      latitude: json['Latitude'] as num?,
+      longitude: json['Longitude'] as double?,
+      latitude: json['Latitude'] as double,
       version: json['Version'] as String?,
       lastHeartbeat:
           json['LastHeartbeat'] != null

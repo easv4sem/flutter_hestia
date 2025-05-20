@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hestia/device/data/models/device.dart';
+import 'package:hestia/device/data/provider/device_provider.dart';
 import 'package:hestia/device/presentation/widgets/device_summary_list.dart';
 import 'package:hestia/map/presentation/widget/device_map.dart';
 import 'package:hestia/presentation/widgets/main_layout_widget.dart';
@@ -17,23 +19,26 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             DeviceSummaryList(),
-            NotificationsPieChart(notifications: notifications.notifications),
-            Expanded(
-             child: DeviceMap(devicesFuture: fetchDevices())
-
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                NotificationsPieChart(
+                  notifications: notifications.notifications,
+                ),
+              ],
             ),
+            Expanded(child: DeviceMap(devicesFuture: fetchDevices(context))),
           ],
         ),
-        ),
-      );
-    
+      ),
+    );
   }
-Future<List<TestDevice>> fetchDevices() async {
-  await Future.delayed(Duration(seconds: 2)); // Simulate loading
-  return [
-    TestDevice(lat: 55.6761, long: 12.5683, color: Colors.green),
-    TestDevice(lat: 51.5074, long: -0.1278, color: Colors.red),
-  ];
-}
 
+  Future<List<Device>> fetchDevices(BuildContext context) async {
+    await Future.delayed(Duration(seconds: 2)); // Simulate loading
+    return Provider.of<DeviceProvider>(
+      context,
+      listen: false,
+    ).devices; // Fetch devices from provider
+  }
 }

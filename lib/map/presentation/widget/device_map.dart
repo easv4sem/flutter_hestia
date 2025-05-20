@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hestia/core/routes.dart';
+import 'package:hestia/device/data/enums/device_state.dart';
+import 'package:hestia/device/data/models/device.dart';
 import 'package:latlong2/latlong.dart';
 
 class DeviceMap extends StatefulWidget {
-  final Future<List<TestDevice>> devicesFuture;
+  final Future<List<Device>> devicesFuture;
 
   const DeviceMap({required this.devicesFuture, super.key});
 
@@ -12,20 +16,26 @@ class DeviceMap extends StatefulWidget {
 }
 
 class _DeviceMapState extends State<DeviceMap> {
-  late Future<List<TestDevice>> _devicesFuture;
+  late Future<List<Device>> _devicesFuture;
+  late final LayerHitNotifier<Device> _hitNotifier;
 
   @override
   void initState() {
     super.initState();
     _devicesFuture = widget.devicesFuture;
+    _hitNotifier = ValueNotifier(null);
+  }
+
+  @override
+  void dispose() {
+    _hitNotifier.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       elevation: 4,
       margin: const EdgeInsets.all(16.0),
       child: Padding(
@@ -39,7 +49,7 @@ class _DeviceMapState extends State<DeviceMap> {
             ),
             const SizedBox(height: 8.0),
             Expanded(
-              child: FutureBuilder<List<TestDevice>>(
+              child: FutureBuilder<List<Device>>(
                 future: _devicesFuture,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -55,21 +65,47 @@ class _DeviceMapState extends State<DeviceMap> {
                     options: MapOptions(
                       initialCenter: LatLng(55.6761, 12.5683),
                       initialZoom: 6.2,
+                      onTap: (_, __) {
+                        final hitResult = _hitNotifier.value;
+                        final device = hitResult?.hitValues.last;
+
+                        if (device != null) {
+                          context.goNamed(
+                            Routes.device.name,
+                            pathParameters: {'deviceId': device.mac.toString()},
+                          );
+                        }
+                      },
                     ),
+
                     children: [
                       TileLayer(
-                        urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        urlTemplate:
+                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                         userAgentPackageName: 'com.example.app',
                       ),
                       CircleLayer(
-                        circles: devices.map((device) {
-                          return CircleMarker(
-                            point: LatLng(device.lat, device.long),
-                            color: device.color.withOpacity(0.6),
-                            useRadiusInMeter: false,
-                            radius: 10.0,
-                          );
-                        }).toList(),
+                        hitNotifier: _hitNotifier,
+                        circles:
+                            devices
+                                .where(
+                                  (device) =>
+                                      device.latitude != null &&
+                                      device.longitude != null,
+                                )
+                                .map(
+                                  (device) => CircleMarker(
+                                    point: LatLng(
+                                      device.latitude!,
+                                      device.longitude!,
+                                    ),
+                                    color: device.mode.color,
+                                    useRadiusInMeter: false,
+                                    radius: 10.0,
+                                    hitValue: device,
+                                  ),
+                                )
+                                .toList(),
                       ),
                     ],
                   );
@@ -81,12 +117,4 @@ class _DeviceMapState extends State<DeviceMap> {
       ),
     );
   }
-}
-
-class TestDevice {
-  final double lat;
-  final double long;
-  final Color color;
-
-  TestDevice({required this.lat, required this.long, required this.color});
 }
