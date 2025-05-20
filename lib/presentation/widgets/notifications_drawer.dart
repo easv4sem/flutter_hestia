@@ -35,27 +35,40 @@ Widget build(BuildContext context) {
       'Notifications',
       style: TextStyle(color: Colors.white, fontSize: 24),
     ),
-    children: List.generate(sortedUnreadNotifications.length, (index) {
-      final item = sortedUnreadNotifications[index];
-
-      if (item.isRead) {
-        return const SizedBox.shrink(); // Skip read notifications
-      }
-
-      return NotificationTile(
-        title: item.title,
-        subtitle: item.subtitle,
-        icon: getNotificationIcon(item.type),
-        tileColor: AppColors.backgroundColor,
-        onPressed: () {
-          notifications.markAsRead(item);
-          item.isRead = true;
-          debugPrint(
-            'Notification removed: ${item.title} : ${item.isRead}',
-          );
+    children: [
+      ListTile(
+        title: const Text(
+          'Clear All',
+          style: TextStyle(color: AppColors.textColorDark),
+        ),
+        onTap: () {
+          notifications.markAllAsRead();
+          debugPrint('All notifications cleared');
         },
-      );
-    }),
+      ),
+
+      ...List.generate(sortedUnreadNotifications.length, (index) {
+        final item = sortedUnreadNotifications[index];
+
+        if (item.isRead) {
+          return const SizedBox.shrink(); // Skip read notifications
+        }
+
+        return NotificationTile(
+          title: item.title,
+          subtitle: item.subtitle,
+          icon: getNotificationIcon(item.type),
+          tileColor: AppColors.backgroundColor,
+          onPressed: () {
+            notifications.markAsRead(item);
+            item.isRead = true;
+            debugPrint(
+              'Notification removed: ${item.title} : ${item.isRead}',
+            );
+          },
+        );
+      }),
+    ],
   );
 }
 
