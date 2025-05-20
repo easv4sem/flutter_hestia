@@ -161,6 +161,7 @@ class AppNotificationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// What the fuck.
   EnumAppNotificationType _parseNotificationType(dynamic value) {
   try {
     int? index;
