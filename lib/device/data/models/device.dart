@@ -13,9 +13,11 @@ class Device {
   final num? port;
   final DeviceState mode;
   final List<Sensor>? sensors;
+  final String? pIUniqueIdentifier;
 
   Device({
     required this.displayName,
+    this.pIUniqueIdentifier,
     this.ip,
     this.mac,
     this.longitude,
@@ -30,6 +32,7 @@ class Device {
   factory Device.fromJson(Map<String, dynamic> json) {
     return Device(
       displayName: json['PIDisplayName'] as String,
+      pIUniqueIdentifier: json['PIUniqueIdentifier'] as String?,
       ip: json['Ip'] as String?,
       port: json['Port'] as num?,
       mac: json['Mac'] as String?,

@@ -13,7 +13,6 @@ class NotificationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final notifications = context.watch<AppNotificationProvider>();
-    
 
     final Map<EnumAppNotificationType, int> typeCounts = {};
     for (var notif in notifications.notifications) {
@@ -171,7 +170,9 @@ class NotificationsPage extends StatelessWidget {
                                     time: item.formatted,
                                     type: item.type,
                                     title: item.title,
-                                    source: "${item.subtitle} Placeholder :)",
+                                    source:
+                                        item.piUniqueIdentifier ??
+                                        "No Unique Identifier was found",
                                   ),
                                 ],
                               ),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:hestia/models/app_notification_item.dart';
 import 'package:hestia/models/enum_app_notification_type.dart';
@@ -8,10 +7,10 @@ import 'package:hestia/service/api_service.dart';
 /// It allows adding, removing, and clearing notifications.
 /// It uses the ChangeNotifier mixin to notify listeners of changes.
 class AppNotificationProvider extends ChangeNotifier {
-
   /// Singleton instance of AppNotification
   AppNotificationProvider._internal();
-  static final AppNotificationProvider _instance = AppNotificationProvider._internal();
+  static final AppNotificationProvider _instance =
+      AppNotificationProvider._internal();
   static AppNotificationProvider get instance => _instance;
 
   final List<AppNotificationItem> _notifications = [];
@@ -19,13 +18,13 @@ class AppNotificationProvider extends ChangeNotifier {
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
- 
+
   /// Getter to retrieve the list of notifications
   List<AppNotificationItem> get notifications => _notifications;
-  List <AppNotificationItem> get unreadNotifications => _unreadNotifications;
+  List<AppNotificationItem> get unreadNotifications => _unreadNotifications;
 
   /// Adds a new notification to the list
-   void addNotification(AppNotificationItem appNotification) {
+  void addNotification(AppNotificationItem appNotification) {
     _notifications.add(appNotification);
     if (!appNotification.isRead) {
       _unreadNotifications.add(appNotification);
@@ -51,7 +50,7 @@ class AppNotificationProvider extends ChangeNotifier {
     _notifications.add(item);
 
     setAsRead(item);
-    
+
     _unreadNotifications.remove(appNotification);
     notifyListeners();
   }
@@ -66,21 +65,39 @@ class AppNotificationProvider extends ChangeNotifier {
   /// Count of notifications from today
   int get todayCount {
     final now = DateTime.now();
-    return _notifications.where((n) =>
-      n.date.year == now.year &&
-      n.date.month == now.month &&
-      n.date.day == now.day
-    ).length;
+    return _notifications
+        .where(
+          (n) =>
+              n.date.year == now.year &&
+              n.date.month == now.month &&
+              n.date.day == now.day,
+        )
+        .length;
   }
 
   /// Count of notifications from the last 7 days (including today)
   int get last7DaysCount {
     final now = DateTime.now();
     final sevenDaysAgo = now.subtract(Duration(days: 6)); // includes today
-    return _notifications.where((n) =>
-      n.date.isAfter(DateTime(sevenDaysAgo.year, sevenDaysAgo.month, sevenDaysAgo.day)) ||
-      n.date.isAtSameMomentAs(DateTime(sevenDaysAgo.year, sevenDaysAgo.month, sevenDaysAgo.day))
-    ).length;
+    return _notifications
+        .where(
+          (n) =>
+              n.date.isAfter(
+                DateTime(
+                  sevenDaysAgo.year,
+                  sevenDaysAgo.month,
+                  sevenDaysAgo.day,
+                ),
+              ) ||
+              n.date.isAtSameMomentAs(
+                DateTime(
+                  sevenDaysAgo.year,
+                  sevenDaysAgo.month,
+                  sevenDaysAgo.day,
+                ),
+              ),
+        )
+        .length;
   }
 
   Future<void> markAllAsRead() async {
@@ -93,22 +110,23 @@ class AppNotificationProvider extends ChangeNotifier {
 
   Future<void> setAsRead(AppNotificationItem notification) async {
     try {
+      final response = await ApiService().put(
+        '/notifications',
 
-      final response = await ApiService().put('/notifications', 
-        
-          notification.toJson()
-        
+        notification.toJson(),
       );
 
       print(response.data);
       print(response.statusCode);
 
       if (response.statusCode == 200) {
-          notification.isRead = true;
-          _unreadNotifications.remove(notification);
-          notifyListeners();
+        notification.isRead = true;
+        _unreadNotifications.remove(notification);
+        notifyListeners();
       } else {
-        throw Exception('Failed to mark notification as read.: ${response.statusCode}');
+        throw Exception(
+          'Failed to mark notification as read.: ${response.statusCode}',
+        );
       }
     } catch (e) {
       print("Error in setAsRead: $e");
@@ -125,24 +143,27 @@ class AppNotificationProvider extends ChangeNotifier {
       final response = await ApiService().get('/notifications');
 
       if (response.statusCode == 200) {
-        final List<dynamic> data = response.data;        
+        final List<dynamic> data = response.data;
         _notifications.clear();
         _unreadNotifications.clear();
 
         for (var item in data) {
           final notification = AppNotificationItem(
+            piUniqueIdentifier: item['PIUniqueIdentifier'],
             uniqueId: item['UniqueIdentifier'],
             title: item['Title'],
             subtitle: item['SubTitle'],
             type: _parseNotificationType(item['Type']),
             isRead: item['IsRead'] ?? false,
-            date: DateTime.parse(item['DateCreated'])
+            date: DateTime.parse(item['DateCreated']),
           );
           print(notification.toJson());
           addNotification(notification);
         }
       } else {
-        throw Exception('Failed to load notifications.: ${response.statusCode}');
+        throw Exception(
+          'Failed to load notifications.: ${response.statusCode}',
+        );
       }
     } catch (e) {
       print("Error loading notifications: $e");
@@ -162,19 +183,21 @@ class AppNotificationProvider extends ChangeNotifier {
   }
 
   EnumAppNotificationType _parseNotificationType(dynamic value) {
-  try {
-    int? index;
-    if (value is int) {
-      index = value;
-    } else if (value is String) {
-      index = int.tryParse(value);
-    }
+    try {
+      int? index;
+      if (value is int) {
+        index = value;
+      } else if (value is String) {
+        index = int.tryParse(value);
+      }
 
-    if (index != null && index >= 0 && index < EnumAppNotificationType.values.length) {
-      return EnumAppNotificationType.values[index];
-    }
-  } catch (_) {}
+      if (index != null &&
+          index >= 0 &&
+          index < EnumAppNotificationType.values.length) {
+        return EnumAppNotificationType.values[index];
+      }
+    } catch (_) {}
 
-  return EnumAppNotificationType.info; // default fallback
-}
+    return EnumAppNotificationType.info; // default fallback
+  }
 }

@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 class AppNotificationItem extends ChangeNotifier {
   final String uniqueId;
+  final String? piUniqueIdentifier;
   final String title;
   final String subtitle;
   final EnumAppNotificationType type;
@@ -12,6 +13,7 @@ class AppNotificationItem extends ChangeNotifier {
   String formatted;
 
   AppNotificationItem({
+    this.piUniqueIdentifier,
     required this.uniqueId,
     required this.title,
     required this.subtitle,
@@ -32,13 +34,13 @@ class AppNotificationItem extends ChangeNotifier {
   Map<String, dynamic> toJson() {
     return {
       'notification': {
-      'UniqueIdentifier': uniqueId,
-      'Title': title,
-      'Subtitle': subtitle,
-      'Type': type.index,
-      'IsRead': isRead,
-      'DateCreated': date.toIso8601String()
-      }
+        'UniqueIdentifier': uniqueId,
+        'Title': title,
+        'Subtitle': subtitle,
+        'Type': type.index,
+        'IsRead': isRead,
+        'DateCreated': date.toIso8601String(),
+      },
     };
   }
 }

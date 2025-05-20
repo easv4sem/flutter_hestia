@@ -29,7 +29,10 @@ class DevicePageContent extends StatelessWidget {
           children: [
             Row(
               children: [
-                IconButton(onPressed: () => context.go(Routes.devices.path) , icon: const Icon(Icons.arrow_back)),
+                IconButton(
+                  onPressed: () => context.go(Routes.devices.path),
+                  icon: const Icon(Icons.arrow_back),
+                ),
                 Text(
                   'Device ID: ${device.mac}',
                   style: const TextStyle(
@@ -133,6 +136,24 @@ class DevicePageContent extends StatelessWidget {
         icon: Icons.punch_clock,
         label: "Last Heartbeat",
         value: device.lastHeartbeat?.toString() ?? "N/A",
+      ),
+      InfoRowWidget(
+        icon: Icons.portable_wifi_off,
+        label: "Port",
+        value: device.port?.toString() ?? "N/A",
+      ),
+      InfoRowWidget(
+        icon: Icons.location_on,
+        label: "Location",
+        value:
+            device.latitude != null && device.longitude != null
+                ? "${device.latitude}, ${device.longitude}"
+                : "N/A",
+      ),
+      InfoRowWidget(
+        icon: Icons.qr_code,
+        label: "Unique ID",
+        value: device.pIUniqueIdentifier ?? "N/A",
       ),
     ]);
   }
