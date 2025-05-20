@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hestia/models/device_provider.dart';
-import 'package:hestia/models/device_state.dart';
-import 'package:hestia/presentation/widgets/device_summary_card.dart';
+import 'package:hestia/device/data/provider/device_provider.dart';
+import 'package:hestia/device/data/enums/device_state.dart';
+import 'package:hestia/device/presentation/widgets/device_summary_card.dart';
 import 'package:provider/provider.dart';
 
 class DeviceSummaryList extends StatelessWidget {
@@ -62,6 +62,16 @@ class DeviceSummaryList extends StatelessWidget {
               color: DeviceState.error.color,
             ),
           ),
+          const SizedBox(width: 16.0),
+          Expanded(
+            child: DeviceSummaryCard(
+              title: 'Setup Devices',
+              count: provider.getNumberOfDevicesByStatus(DeviceState.setup),
+              icon: Icons.settings,
+              color: DeviceState.setup.color,
+            ),
+          ),
+          
         ],
       ),
     );
