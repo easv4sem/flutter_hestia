@@ -16,6 +16,12 @@ void main() async {
   await DeviceProvider.instance.loadDevices();
   await AppNotificationProvider.instance.loadNotifications();
 
+  // Periodic refresh every 2 minutes (adjust as needed)
+  Timer.periodic(Duration(minutes: 2), (timer) {
+    AppNotificationProvider.instance.refreshNotifications();
+    DeviceProvider.instance.refreshDevices();
+  });
+
   runApp(
     MultiProvider(
       providers: [

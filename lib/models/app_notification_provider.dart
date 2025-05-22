@@ -149,13 +149,13 @@ class AppNotificationProvider extends ChangeNotifier {
 
         for (var item in data) {
           final notification = AppNotificationItem(
-            piUniqueIdentifier: item['PIUniqueIdentifier'],
+            piUniqueIdentifier: item['PiUniqeIdentifier'],
             uniqueId: item['UniqueIdentifier'],
             title: item['Title'],
-            subtitle: item['SubTitle'],
+            subtitle: item['SubTitle'] ?? "No subtitle",
             type: _parseNotificationType(item['Type']),
             isRead: item['IsRead'] ?? false,
-            date: DateTime.parse(item['DateCreated']),
+            date:  DateTime.parse(item['DateCreated']).toLocal(),
           );
           print(notification.toJson());
           addNotification(notification);
