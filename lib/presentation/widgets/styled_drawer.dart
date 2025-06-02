@@ -16,7 +16,7 @@ class StyledDrawer extends StatelessWidget {
 /// The default value for [children] is an empty list.  
   const StyledDrawer({
     super.key,
-    this.header,
+    required this.header,
     this.children = const [],
   });
 

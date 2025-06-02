@@ -14,7 +14,6 @@ class NotificationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final notifications = context.watch<AppNotificationProvider>();
     
-
     final Map<EnumAppNotificationType, int> typeCounts = {};
     for (var notif in notifications.notifications) {
       typeCounts[notif.type] = (typeCounts[notif.type] ?? 0) + 1;

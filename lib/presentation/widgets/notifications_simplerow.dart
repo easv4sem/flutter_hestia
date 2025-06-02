@@ -23,7 +23,6 @@ class NotificationsSimplerow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final deviceMac = "10";
     final macAdress =
         Provider.of<DeviceProvider>(context, listen: false).devices
             .where((device) => device.pIUniqueIdentifier == source)
