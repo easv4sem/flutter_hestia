@@ -17,6 +17,8 @@ class AppNotificationProvider extends ChangeNotifier {
   final List<AppNotificationItem> _unreadNotifications = [];
 
   bool _isLoading = false;
+
+  /// Getter to check if notifications are currently loading
   bool get isLoading => _isLoading;
 
   /// Getter to retrieve the list of notifications

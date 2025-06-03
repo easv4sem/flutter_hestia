@@ -19,7 +19,6 @@ class _NotificationsDrawerState extends State<NotificationsDrawer> {
 
   void _handleClearAll(AppNotificationProvider notifications) {
     notifications.markAllAsRead();
-    debugPrint('All notifications cleared');
 
     setState(() => _showClearedMessage = true);
 
@@ -55,7 +54,7 @@ class _NotificationsDrawerState extends State<NotificationsDrawer> {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Text(
-              '🎉 All cleared! 🎉',
+              'All cleared.',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.green,
